@@ -18,8 +18,14 @@ public:
 };
 
 class FuncaoAgregada: public Funcao{
+public:
+	void agrega (Funcao* f)
+	{
+		FuncaoVetor.push_back(f);
+	}
 
-
+private:
+	vector<Funcao*> FuncaoVetor;
 };
 
 
