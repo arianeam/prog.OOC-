@@ -7,7 +7,21 @@
 //============================================================================
 
 #include <iostream>
+#include <vector>
 using namespace std;
+
+class Funcao{
+public:
+	Funcao(){}
+	virtual double operador(double x)=0;
+	virtual ~Funcao(){}
+};
+
+class FuncaoAgregada: public Funcao{
+
+
+};
+
 
 int main() {
 	cout << "git teste" << endl; // prints !!!Hello World!!!
