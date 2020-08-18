@@ -12,10 +12,11 @@ using namespace std;
 
 class Funcao{
 public:
-	Funcao(){}
+    Funcao(){}
 	virtual double operador(double x)=0;
 	virtual ~Funcao(){}
 };
+
 
 class FuncaoAgregada: public Funcao{
 public:
@@ -24,10 +25,22 @@ public:
 		FuncaoVetor.push_back(f);
 	}
 
+
+
 private:
 	vector<Funcao*> FuncaoVetor;
 };
 
+
+class Constante: public Funcao{
+public:
+
+	Constante(double v): value(v){}
+
+
+private:
+	double value;
+};
 
 int main() {
 	cout << "git teste" << endl; // prints !!!Hello World!!!
