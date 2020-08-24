@@ -13,11 +13,11 @@ using namespace std;
 class Funcao{
 public:
     Funcao(){}
-	virtual double operador(double x)=0;
+	virtual operator<<(double x)=0;
 	virtual ~Funcao(){}
 };
 
-
+//----------------------------------------------------
 class FuncaoAgregada: public Funcao{
 public:
 	void agrega (Funcao* f)
@@ -31,16 +31,27 @@ private:
 	vector<Funcao*> FuncaoVetor;
 };
 
+//---------------------------------------------------
 
 class Constante: public Funcao{
 public:
 
-	Constante(double v): value(v){}
+	Constante(double v): value(v){
+	}
+	friend ostream& operator<< (ostream &output, const Constante &c){
+		output<<"f("<<c.value<<")";
+		output<<endl;
+		return output;
+
+	}
 
 
 private:
 	double value;
 };
+
+//------------------------------------------------------
+
 
 int main() {
 	cout << "git teste" << endl; // prints !!!Hello World!!!
