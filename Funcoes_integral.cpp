@@ -13,8 +13,10 @@ using namespace std;
 class Funcao{
 public:
     Funcao(){}
-	virtual operator<<(double x)=0;
+	virtual double operador(double x)=0;
 	virtual ~Funcao(){}
+
+
 };
 
 //----------------------------------------------------
@@ -38,11 +40,10 @@ public:
 
 	Constante(double v): value(v){
 	}
-	friend ostream& operator<< (ostream &output, const Constante &c){
-		output<<"f("<<c.value<<")";
-		output<<endl;
-		return output;
-
+	double operador(double v)
+	{
+		cout<< "f(x) = "<< value <<endl;
+		return value;
 	}
 
 
@@ -54,6 +55,10 @@ private:
 
 
 int main() {
-	cout << "git teste" << endl; // prints !!!Hello World!!!
+
+
+   Constante i(5.13);
+   i.operador(5.13);
+
 	return 0;
 }
