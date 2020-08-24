@@ -12,7 +12,7 @@ using namespace std;
 
 class Funcao{
 public:
-    Funcao(){}
+
 	virtual double operador(double x)=0;
 	virtual ~Funcao(){}
 
@@ -22,15 +22,21 @@ public:
 //----------------------------------------------------
 class FuncaoAgregada: public Funcao{
 public:
+
+
 	void agrega (Funcao* f)
 	{
 		FuncaoVetor.push_back(f);
 	}
 
-
+	double operador (double x)
+	{
+		return 0;
+	}
 
 private:
 	vector<Funcao*> FuncaoVetor;
+
 };
 
 //---------------------------------------------------
@@ -39,6 +45,7 @@ class Constante: public Funcao{
 public:
 
 	Constante(double v): value(v){
+		operador(v);
 	}
 	double operador(double v)
 	{
@@ -58,7 +65,9 @@ int main() {
 
 
    Constante i(5.13);
-   i.operador(5.13);
+   FuncaoAgregada fa;
+
+
 
 	return 0;
 }
