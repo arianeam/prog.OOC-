@@ -15,7 +15,8 @@ using namespace std;
 class Funcao{
 public:
 
-	virtual double operator()(double x)=0;
+	virtual double operator()(void)=0;
+	virtual double getvalue(void)=0;
 	virtual ~Funcao(){}
 
 
@@ -28,20 +29,33 @@ class FuncaoAgregada: public Funcao{
 public:
 
 
+
 	void agrega (Funcao* f)
 	{
 		fv.push_back(f);
 
 	}
 
-	double operator()(double x)
+	double operator()(void)
 	{
-		return 0;
+        fx = 0;
+		for(FuncaoVector::iterator it = fv.begin(); it != fv.end(); it++){
+				 cout<<"f(x) agregada: "<< static_cast<Funcao*>(*it) ->getvalue()<<endl;
+				 fx += static_cast<Funcao*>(*it) ->getvalue();
+			}
+		cout<<"f(x)= "<< fx<<endl;
+
+		return fx;
+	}
+
+	double getvalue(void)
+	{
+		return fx;
 	}
 
 private:
 	FuncaoVector fv;
-
+	double fx;
 };
 
 
@@ -51,17 +65,19 @@ private:
 class Constante: public Funcao{
 public:
 
-	Constante(double v): value(v){
+	Constante(double v): value(v){}
 
-	}
-	double operator()(double v)
+	double operator()(void)
 	{
 		cout<< "Constante"<< endl;
 		cout<< "f(x) = "<< value << endl;
 		cout<< endl;
 		return value;
 	}
-
+double getvalue(void)
+{
+	return value;
+}
 
 private:
 	double value;
@@ -74,9 +90,13 @@ int main() {
 
 
    Constante i(5.13);
-   i(5.13);
+   i();
+   Constante j(5.13);
+      j();
    FuncaoAgregada fa;
    fa.agrega(&i);
+   fa.agrega(&j);
+   fa();
 
 
 
