@@ -40,7 +40,11 @@ public:
            k = k+step;
        }
 
-       i = (step/2.0);
+       fx0 = f->operator()(x0);
+       fxn = f->operator()(x1);
+
+       i = (step/2.0)*(fx0 + 2*soma + fxn);
+       cout<< "integral = "<< i << endl;
 
 		return i;
 	}
@@ -157,7 +161,7 @@ int main() {
 	fa.agrega(&e);
    // fa(2);
 	x0 = 0;
-	x1 = 1;
+	x1 = 0.5;
 	step = 0.1;
 
    Funcao::integrar(&fa,x0,x1,step);
