@@ -25,18 +25,22 @@ public:
        cout<< "Passo: "<< step<< endl;
        cout<<"Intervalo: [" << x0 << "," << x1 << "]" << endl;
 
-		return n;
+       i = (step/2.0);
+
+		return i;
 	}
 
 	virtual ~Funcao() {
 	}
 
 private:
-	double i;
+	static double i;
     static double n;
 };
 
+ double Funcao :: i;
  double Funcao :: n;
+
 //----------------------------------------------------
 typedef vector<Funcao*> FuncaoVector;
 
