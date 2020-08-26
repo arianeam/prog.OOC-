@@ -13,14 +13,19 @@ using namespace std;
 class Funcao {
 public:
 
+	Funcao(){};
 	virtual double operator()(double x)=0;
 	virtual double getvalue(void)=0;
 	virtual void setvalue(double x)=0;
 
-	static double integrar(Funcao* f, double x0, double x1, double step)
+   static double integrar(Funcao* f, double x0, double x1, double step)
 	{
+       n= (x1 - x0)/step;
+       cout<<"Nemero de segmentos: "<< n << endl;
+       cout<< "Passo: "<< step<< endl;
+       cout<<"Intervalo: [" << x0 << "," << x1 << "]" << endl;
 
-		return 0;
+		return n;
 	}
 
 	virtual ~Funcao() {
@@ -28,14 +33,17 @@ public:
 
 private:
 	double i;
-
+    static double n;
 };
 
+ double Funcao :: n;
 //----------------------------------------------------
 typedef vector<Funcao*> FuncaoVector;
 
 class FuncaoAgregada: public Funcao {
 public:
+
+	FuncaoAgregada(){}
 
 	void agrega(Funcao *f) {
 		fv.push_back(f);
@@ -75,6 +83,7 @@ private:
 class Constante: public Funcao {
 public:
 
+	Constante(){}
 	Constante(double v) :
 			value(v) {
 	}
@@ -148,6 +157,7 @@ int main() {
 	fa.agrega(&j);
 	fa.agrega(&e);
 	fa(2);
+   Funcao::integrar(&fa,0,5,0.1);
 
 	return 0;
 }
