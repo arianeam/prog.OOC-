@@ -16,8 +16,6 @@ public:
 	Funcao(){};
 	Funcao(Funcao* f){}
 	virtual double operator()(double x)=0;
-	//virtual double getvalue(void)=0;
-	//virtual void setvalue(double x)=0;
 
    static double integrar(Funcao* f, double x0, double x1, double step)
 	{
@@ -59,7 +57,7 @@ private:
 
 //----------------------------------------------------
 typedef vector<Funcao*> FuncaoVector;
-typedef vector<double> fxVector;
+
 
 class FuncaoAgregada: public Funcao {
 public:
@@ -80,27 +78,13 @@ public:
 			fx += static_cast<Funcao*>(*it)->operator()(x);
 		}
 
-		fxresultados.push_back(fx);
 		cout << "f("<<x<<")= " << fx << endl;
 		return fx;
 	}
 
-	/*double getvalue(void) {
 
-        double value;
-        value = fxresultados[0];
-        fxresultados.pop_back();
-		cout<<" fx resultado: " <<value<<endl;
-		return value;
-	}*/
-
-	/*void setvalue(double xvalue)
-	{
-        x = xvalue;
-	}*/
 private:
 	FuncaoVector fv;
-	fxVector fxresultados;
 	double fx;
 	double x;
 };
@@ -121,15 +105,7 @@ public:
 		cout << endl;
 		return value;
 	}
-	/*double getvalue(void) {
 
-		return value;
-	}*/
-
-	/*void setvalue(double x)
-		{
-
-		}*/
 
 private:
 	double value;
@@ -155,18 +131,7 @@ public:
 		cout<<a<<".x="<<fx<<endl;
 		return fx;
 	}
-	/*double getvalue(void) {
-		fx = a*xvalue;
-		cout<<"x = "<<xvalue<<endl;
-		cout<<a<<".x="<<fx<<endl;
-		return fx;
-	}
 
-	void setvalue(double x)
-	{
-			xvalue = x;
-
-	}*/
 
 private:
 	double a;
@@ -178,28 +143,23 @@ private:
 
 int main() {
 
-	double k, x0, x1, step;
+	double x0, x1, step;
+
 	Constante i(5.15);
-	i(5.15);
+	//i(5.15);
 	Constante j(10.50);
-	j(10.50);
+	//j(10.50);
 	Escalar e(20.50);
-	e(20.50);
+	//e(20.50);
 	FuncaoAgregada fa;
 	fa.agrega(&i);
 	fa.agrega(&j);
 	fa.agrega(&e);
-
+   // fa(2);
 	x0 = 0;
 	x1 = 1;
 	step = 0.1;
-	k = x0 + step;
 
-	while (k<x1)
-	{
-		fa(k);
-		k = k+step;
-	}
    Funcao::integrar(&fa,x0,x1,step);
 
 	return 0;
