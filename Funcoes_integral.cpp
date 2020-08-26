@@ -60,13 +60,14 @@ public:
 		return fx;
 	}
 
-	void setvalue(double x)
+	void setvalue(double xvalue)
 	{
-
+        x = xvalue;
 	}
 private:
 	FuncaoVector fv;
 	double fx;
+	double x;
 };
 
 //---------------------------------------------------
