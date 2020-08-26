@@ -14,9 +14,10 @@ class Funcao {
 public:
 
 	Funcao(){};
+	Funcao(Funcao* f){}
 	virtual double operator()(double x)=0;
-	virtual double getvalue(void)=0;
-	virtual void setvalue(double x)=0;
+	//virtual double getvalue(void)=0;
+	//virtual void setvalue(double x)=0;
 
    static double integrar(Funcao* f, double x0, double x1, double step)
 	{
@@ -35,8 +36,8 @@ public:
 
        while (k < x1)
        {
-           f->setvalue(k);
-           soma += f->getvalue();
+
+           soma += f->operator()(k);
            cout<<"soma = " << soma << endl;
            k = k+step;
        }
@@ -74,9 +75,9 @@ public:
 		fx = 0;
 		for (FuncaoVector::iterator it = fv.begin(); it != fv.end(); it++) {
 
-		    static_cast<Funcao*>(*it)->setvalue(x);
-			cout << "f(x) agregada: " << static_cast<Funcao*>(*it)->getvalue()	<< endl;
-			fx += static_cast<Funcao*>(*it)->getvalue();
+		    static_cast<Funcao*>(*it)->operator()(x);
+			cout << "f(x) agregada: " << static_cast<Funcao*>(*it)->operator()(x)<< endl;
+			fx += static_cast<Funcao*>(*it)->operator()(x);
 		}
 
 		fxresultados.push_back(fx);
@@ -84,19 +85,19 @@ public:
 		return fx;
 	}
 
-	double getvalue(void) {
+	/*double getvalue(void) {
 
         double value;
         value = fxresultados[0];
         fxresultados.pop_back();
 		cout<<" fx resultado: " <<value<<endl;
 		return value;
-	}
+	}*/
 
-	void setvalue(double xvalue)
+	/*void setvalue(double xvalue)
 	{
         x = xvalue;
-	}
+	}*/
 private:
 	FuncaoVector fv;
 	fxVector fxresultados;
@@ -120,15 +121,16 @@ public:
 		cout << endl;
 		return value;
 	}
-	double getvalue(void) {
+	/*double getvalue(void) {
 
 		return value;
-	}
+	}*/
 
-	void setvalue(double x)
+	/*void setvalue(double x)
 		{
 
-		}
+		}*/
+
 private:
 	double value;
 };
@@ -148,9 +150,12 @@ public:
 		cout<< "Escalar"<<endl;
 		cout<<"f(x) =" << a <<"x"<<endl;
 		cout<< endl;
-		return a;
+		fx = a*x;
+		cout<<"x = "<<x<<endl;
+		cout<<a<<".x="<<fx<<endl;
+		return fx;
 	}
-	double getvalue(void) {
+	/*double getvalue(void) {
 		fx = a*xvalue;
 		cout<<"x = "<<xvalue<<endl;
 		cout<<a<<".x="<<fx<<endl;
@@ -161,13 +166,13 @@ public:
 	{
 			xvalue = x;
 
-	}
+	}*/
 
 private:
 	double a;
 	Funcao *fe;
 	double fx;
-	double xvalue;
+	//double xvalue;
 };
 //------------------------------------------------------
 
