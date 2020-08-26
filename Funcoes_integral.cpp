@@ -108,7 +108,10 @@ public:
 
 	double operator()(void) {
 
-		return 0;
+		cout<< "Escalar"<<endl;
+		cout<<"f(x) =" << a <<"x"<<endl;
+		cout<< endl;
+		return a;
 	}
 	double getvalue(void) {
 		return a;
@@ -117,6 +120,7 @@ public:
 	void setvalue(double x)
 	{
 			xvalue = x;
+			//a = a*xvalue; // para testar a função
 	}
 
 private:
@@ -128,13 +132,17 @@ private:
 
 int main() {
 
-	Constante i(5.13);
+	Constante i(5.15);
 	i();
-	Constante j(5.13);
+	Constante j(10.50);
 	j();
+	Escalar e(20.50);
+	e();
+	e.setvalue(2);
 	FuncaoAgregada fa;
 	fa.agrega(&i);
 	fa.agrega(&j);
+	fa.agrega(&e);
 	fa();
 
 	return 0;
