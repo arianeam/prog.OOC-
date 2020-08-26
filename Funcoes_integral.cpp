@@ -20,10 +20,26 @@ public:
 
    static double integrar(Funcao* f, double x0, double x1, double step)
 	{
+	   //Integral = (step/2).(f(x0) + 2.soma(f(xi)) + f(xn)) , sendo i=1 até i=n-1
+
+       double n, soma, fx0, fxn;
+	   double k = x0 + step;
        n= (x1 - x0)/step;
-       cout<<"Nemero de segmentos: "<< n << endl;
+       cout<<endl;
+       cout<<"Numero de segmentos: "<< n << endl;
        cout<< "Passo: "<< step<< endl;
        cout<<"Intervalo: [" << x0 << "," << x1 << "]" << endl;
+       cout<<endl;
+
+
+
+       while (k < x1)
+       {
+           f->setvalue(k);
+           soma += f->getvalue();
+           cout<<"soma = " << soma << endl;
+           k = k+step;
+       }
 
        i = (step/2.0);
 
@@ -35,14 +51,14 @@ public:
 
 private:
 	static double i;
-    static double n;
+
 };
 
  double Funcao :: i;
- double Funcao :: n;
 
 //----------------------------------------------------
 typedef vector<Funcao*> FuncaoVector;
+typedef vector<double> fxVector;
 
 class FuncaoAgregada: public Funcao {
 public:
@@ -63,13 +79,18 @@ public:
 			fx += static_cast<Funcao*>(*it)->getvalue();
 		}
 
-		cout << "f(x)= " << fx << endl;
-
+		fxresultados.push_back(fx);
+		cout << "f("<<x<<")= " << fx << endl;
 		return fx;
 	}
 
 	double getvalue(void) {
-		return fx;
+
+        double value;
+        value = fxresultados[0];
+        fxresultados.pop_back();
+		cout<<" fx resultado: " <<value<<endl;
+		return value;
 	}
 
 	void setvalue(double xvalue)
@@ -78,6 +99,7 @@ public:
 	}
 private:
 	FuncaoVector fv;
+	fxVector fxresultados;
 	double fx;
 	double x;
 };
@@ -99,6 +121,7 @@ public:
 		return value;
 	}
 	double getvalue(void) {
+
 		return value;
 	}
 
@@ -129,14 +152,14 @@ public:
 	}
 	double getvalue(void) {
 		fx = a*xvalue;
-		cout<<"fx= "<<fx<<endl;
+		cout<<"x = "<<xvalue<<endl;
+		cout<<a<<".x="<<fx<<endl;
 		return fx;
 	}
 
 	void setvalue(double x)
 	{
 			xvalue = x;
-			cout<<"x = "<<x<<endl;
 
 	}
 
@@ -150,6 +173,7 @@ private:
 
 int main() {
 
+	double k, x0, x1, step;
 	Constante i(5.15);
 	i(5.15);
 	Constante j(10.50);
@@ -160,8 +184,18 @@ int main() {
 	fa.agrega(&i);
 	fa.agrega(&j);
 	fa.agrega(&e);
-	fa(2);
-   Funcao::integrar(&fa,0,5,0.1);
+
+	x0 = 0;
+	x1 = 1;
+	step = 0.1;
+	k = x0 + step;
+
+	while (k<x1)
+	{
+		fa(k);
+		k = k+step;
+	}
+   Funcao::integrar(&fa,x0,x1,step);
 
 	return 0;
 }
