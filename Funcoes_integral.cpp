@@ -15,6 +15,7 @@ public:
 
 	virtual double operator()(void)=0;
 	virtual double getvalue(void)=0;
+	virtual void setvalue(double x)=0;
 
 	static double integrar(Funcao* f, double x0, double x1, double step)
 	{
@@ -58,6 +59,10 @@ public:
 		return fx;
 	}
 
+	void setvalue(double x)
+	{
+
+	}
 private:
 	FuncaoVector fv;
 	double fx;
@@ -82,6 +87,10 @@ public:
 		return value;
 	}
 
+	void setvalue(double x)
+		{
+
+		}
 private:
 	double value;
 };
@@ -105,22 +114,28 @@ public:
 		return a;
 	}
 
+	void setvalue(double x)
+	{
+			xvalue = x;
+	}
+
 private:
 	double a;
 	Funcao *fe;
+	double xvalue;
 };
 //------------------------------------------------------
 
 int main() {
 
-	/*Constante i(5.13);
+	Constante i(5.13);
 	i();
 	Constante j(5.13);
 	j();
 	FuncaoAgregada fa;
 	fa.agrega(&i);
 	fa.agrega(&j);
-	fa();*/
+	fa();
 
 	return 0;
 }
