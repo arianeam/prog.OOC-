@@ -91,7 +91,9 @@ class Escalar: public Funcao {
 public:
 
 	Escalar(){}
-	Escalar(double v): value(v){}
+	Escalar(double v): a(v){}
+	Escalar(Funcao* f): fe(f){}
+	Escalar(Funcao* f, double v): a(v), fe(f){}
 
 
 
@@ -100,24 +102,25 @@ public:
 		return 0;
 	}
 	double getvalue(void) {
-		return value;
+		return a;
 	}
 
 private:
-	double value;
+	double a;
+	Funcao *fe;
 };
 //------------------------------------------------------
 
 int main() {
 
-	Constante i(5.13);
+	/*Constante i(5.13);
 	i();
 	Constante j(5.13);
 	j();
 	FuncaoAgregada fa;
 	fa.agrega(&i);
 	fa.agrega(&j);
-	fa();
+	fa();*/
 
 	return 0;
 }
