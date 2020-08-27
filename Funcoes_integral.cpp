@@ -150,8 +150,8 @@ class Seno: public Funcao{
 public:
 	Seno(){}
 	Seno(double v): value(v){}
-	Seno(Funcao* f){}
-	Seno(double v, Funcao* f){}
+	Seno(Funcao* f): fs(f){}
+	Seno(double v, Funcao* f): value(v), fs(f){}
 
 	double operator()(double x)
 		{
@@ -163,6 +163,7 @@ public:
 
 private:
 	double value;
+	Funcao* fs;
 
 };
 
@@ -172,8 +173,8 @@ class Cosseno: public Funcao{
 public:
 	Cosseno(){}
 	Cosseno(double v): value(v){}
-	Cosseno(Funcao* f){}
-	Cosseno(double v, Funcao* f){}
+	Cosseno(Funcao* f): fc(f){}
+	Cosseno(double v, Funcao* f): value(v), fc(f){}
 
 	double operator()(double x)
 		{
@@ -185,13 +186,28 @@ public:
 
 private:
 	double value;
+	Funcao* fc;
 
 };
 
 //-----------------------------------------------------
 
 class Potencial: public Funcao{
+public:
 
+	Potencial(){}
+	Potencial(double v): a(v){}
+	Potencial(Funcao* f): fp(f){}
+	Potencial(double v, Funcao* f): a(v), fp(f){}
+
+	double operator()(double x)
+	{
+		return 0;
+	}
+
+private:
+    double a;
+    Funcao* fp;
 
 };
 
@@ -214,6 +230,8 @@ int main() {
 	x0 = 0;
 	x1 = 0.5;
 	step = 0.1;*/
+	Seno s;
+	s(0);
 	Cosseno c;
 	c(0);
 
