@@ -155,7 +155,10 @@ public:
 
 	double operator()(double x)
 		{
-		return 0;
+		cout<< "f("<<x<<")= sen("<<x<<")"<<endl;
+		value = sin(x);
+		cout<< "f("<<x<<")= "<< value <<endl;
+		return value;
 		}
 
 private:
@@ -165,11 +168,33 @@ private:
 
 //------------------------------------------------------
 
+class Cosseno: public Funcao{
+public:
+	Cosseno(){}
+	Cosseno(double v): value(v){}
+	Cosseno(Funcao* f){}
+	Cosseno(double v, Funcao* f){}
+
+	double operator()(double x)
+		{
+		cout<< "f("<<x<<")= cos("<<x<<")"<<endl;
+		value = cos(x);
+		cout<< "f("<<x<<")= "<< value <<endl;
+		return value;
+		}
+
+private:
+	double value;
+
+};
+
+//-----------------------------------------------------
+
 int main() {
 
 	double x0, x1, step;
 
-	Constante i(5.15);
+	/*Constante i(5.15);
 	//i(5.15);
 	Constante j(10.50);
 	//j(10.50);
@@ -182,9 +207,11 @@ int main() {
    // fa(2);
 	x0 = 0;
 	x1 = 0.5;
-	step = 0.1;
+	step = 0.1;*/
+	Cosseno c;
+	c(0);
 
-   Funcao::integrar(&fa,x0,x1,step);
+  // Funcao::integrar(&fa,x0,x1,step);
 
 	return 0;
 }
