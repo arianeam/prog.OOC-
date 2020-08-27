@@ -202,6 +202,9 @@ public:
 
 	double operator()(double x)
 	{
+		cout<<"f(x) = x^" << a << endl;
+		cout<< "f(" << x << ")= "<< x << "^" << a << endl;
+
 		return 0;
 	}
 
