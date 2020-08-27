@@ -207,7 +207,7 @@ public:
         fx = pow(x,a);
         cout<<"potenciacao resultado: "<<fx<<endl;
 
-		return 0;
+		return fx;
 	}
 
 private:
@@ -218,32 +218,65 @@ private:
 };
 
 //----------------------------------------------------
+
+class Exponencial: public Funcao{
+public:
+
+	Exponencial(){}
+	Exponencial(double v): a(v){}
+	Exponencial(Funcao* f): fexp(f){}
+	Exponencial(double v, Funcao* f): a(v), fexp(f){}
+
+	double operator()(double x)
+	{
+		cout<<"f(x) = " << a << "^x" << endl;
+		cout<< "f(" << x << ")= "<< a << "^" << x << endl;
+        fx = pow(a,x);
+        cout<<"exponencial resultado: "<<fx<<endl;
+
+		return fx;
+	}
+
+private:
+	double fx;
+    double a;
+    Funcao* fexp;
+
+};
+
+//-----------------------------------------------------------------
+
+
 int main() {
 
 	double x0, x1, step;
 
-	/*Constante i(5.15);
-	//i(5.15);
+
 	Constante j(10.50);
 	//j(10.50);
 	Escalar e(20.50);
 	//e(20.50);
 	FuncaoAgregada fa;
-	fa.agrega(&i);
 	fa.agrega(&j);
 	fa.agrega(&e);
    // fa(2);
 	x0 = 0;
 	x1 = 0.5;
-	step = 0.1;*/
+	step = 0.001;
 	Seno s;
-	s(0);
+	//s(0);
+	fa.agrega(&s);
 	Cosseno c;
-	c(0);
-	Potencial p(0.0); // se colocar 0 ele gera um erro: call of overloaded 'Potencial(int)' is ambiguous
-	p(3);
+	//c(0);
+	fa.agrega(&c);
+	Potencial p(2); // se colocar 0 ele gera um erro: call of overloaded 'Potencial(int)' is ambiguous
+	//p(3);
+	fa.agrega(&p);
+	Exponencial expo(2);
+	//expo(2);
+	fa.agrega(&expo);
 
-  // Funcao::integrar(&fa,x0,x1,step);
+   Funcao::integrar(&fa,x0,x1,step);
 
 	return 0;
 }
