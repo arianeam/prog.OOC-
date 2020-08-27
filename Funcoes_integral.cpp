@@ -25,9 +25,9 @@ public:
 
        double n, soma, fx0, fxn;
 	   double k = x0 + step;
-       n= (x1 - x0)/step;
+      // n= (x1 - x0)/step;
        cout<<endl;
-       cout<<"Numero de segmentos: "<< n << endl;
+      // cout<<"Numero de segmentos: "<< n << endl;
        cout<< "Passo: "<< step<< endl;
        cout<<"Intervalo: [" << x0 << "," << x1 << "]" << endl;
        cout<<endl;
@@ -190,6 +190,12 @@ private:
 
 //-----------------------------------------------------
 
+class Potencial: public Funcao{
+
+
+};
+
+//----------------------------------------------------
 int main() {
 
 	double x0, x1, step;
