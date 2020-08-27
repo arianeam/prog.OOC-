@@ -204,11 +204,14 @@ public:
 	{
 		cout<<"f(x) = x^" << a << endl;
 		cout<< "f(" << x << ")= "<< x << "^" << a << endl;
+        fx = pow(x,a);
+        cout<<"potenciacao resultado: "<<fx<<endl;
 
 		return 0;
 	}
 
 private:
+	double fx;
     double a;
     Funcao* fp;
 
@@ -237,6 +240,8 @@ int main() {
 	s(0);
 	Cosseno c;
 	c(0);
+	Potencial p(0.0); // se colocar 0 ele gera um erro: call of overloaded 'Potencial(int)' is ambiguous
+	p(3);
 
   // Funcao::integrar(&fa,x0,x1,step);
 
