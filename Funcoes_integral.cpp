@@ -8,6 +8,8 @@
 
 #include <iostream>
 #include <vector>
+#include <math.h>
+
 using namespace std;
 
 class Funcao {
@@ -143,6 +145,24 @@ private:
 	double fx;
 	//double xvalue;
 };
+//------------------------------------------------------
+class Seno: public Funcao{
+public:
+	Seno(){}
+	Seno(double v): value(v){}
+	Seno(Funcao* f){}
+	Seno(double v, Funcao* f){}
+
+	double operator()(double x)
+		{
+		return 0;
+		}
+
+private:
+	double value;
+
+};
+
 //------------------------------------------------------
 
 int main() {
