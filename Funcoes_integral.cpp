@@ -15,23 +15,20 @@ using namespace std;
 class Funcao {
 public:
 
-	Funcao() {
-	}
+	Funcao() {}
 
-	Funcao(Funcao *f) {
-	}
+	Funcao(Funcao *f) {}
+
 	virtual double operator()(double x)=0;
 
 	static double integrar(Funcao *f, double x0, double x1, double step) {
 		//Integral = (step/2).(f(x0) + 2.soma(f(xi)) + f(xn)) , sendo i=1 até i=n-1
 
-		double n, soma, fx0, fxn;
+		double soma, fx0, fxn;
 		double k = x0 + step;
-		// n= (x1 - x0)/step;
 		cout << endl;
-		// cout<<"Numero de segmentos: "<< n << endl;
 		cout << "Passo: " << step << endl;
-		cout << "Intervalo: [" << x0 << "," << x1 << "]" << endl;
+		cout << "Intervalo de integração : [" << x0 << "," << x1 << "]" << endl;
 		cout << endl;
 
 		while (k < x1) {
@@ -50,8 +47,7 @@ public:
 		return i;
 	}
 
-	virtual ~Funcao() {
-	}
+	virtual ~Funcao() {}
 
 private:
 	static double i;
@@ -61,26 +57,24 @@ private:
 double Funcao::i;
 
 //----------------------------------------------------
+
 typedef vector<Funcao*> FuncaoVector;
 
 class FuncaoAgregada: public Funcao {
 public:
 
-	FuncaoAgregada() {
-	}
+	FuncaoAgregada() {}
 
-	void agrega(Funcao *f) {
-		fv.push_back(f);
-
-	}
+	void agrega(Funcao *f) { fv.push_back(f); }
 
 	double operator()(double x) {
-		fx = 0;
+
+		double fx = 0;
+
 		for (FuncaoVector::iterator it = fv.begin(); it != fv.end(); it++) {
 
 			static_cast<Funcao*>(*it)->operator()(x);
-			cout << "f(x) agregada: "
-					<< static_cast<Funcao*>(*it)->operator()(x) << endl;
+			cout << "f(x) agregada: "<< static_cast<Funcao*>(*it)->operator()(x) << endl;
 			fx += static_cast<Funcao*>(*it)->operator()(x);
 		}
 
@@ -90,8 +84,6 @@ public:
 
 private:
 	FuncaoVector fv;
-	double fx;
-	double x;
 };
 
 //---------------------------------------------------
@@ -99,7 +91,7 @@ private:
 class Constante: public Funcao {
 public:
 
-	Constante() {
+	Constante(): value(0) {
 	}
 	Constante(double v) :
 			value(v) {
@@ -107,7 +99,7 @@ public:
 
 	double operator()(double x) {
 		cout << "Constante" << endl;
-		cout << "f(x) = " << value << endl;
+		cout << "C = " << value << endl;
 		cout << endl;
 		return value;
 	}
@@ -120,26 +112,29 @@ private:
 class Escalar: public Funcao {
 public:
 
-	Escalar():a(0), fe(0) {
+	Escalar():a(0), f(0) {
 	}
 	Escalar(double v) :
-			a(v), fe(0) {
+			a(v), f(0) {
 	}
-	Escalar(Funcao *f) :
-			a(0), fe(f) {
+	Escalar(Funcao *func) :
+			a(0), f(func) {
 	}
-	Escalar(Funcao *f, double v) :
-			a(v), fe(f) {
+	Escalar(Funcao *func, double v) :
+			a(v), f(func) {
 	}
 
 	double operator()(double x) {
 
-		if (fe != NULL) {
-			x = fe->operator()(x);
+		double fx = 0;
+
+		if (f != NULL)
+		{
+			x = f->operator()(x);
 			cout<< "x = "<< x<< endl;
 		}
 		cout << "Escalar" << endl;
-		cout << "f(x) =" << a << "x" << endl;
+		cout << "f(x) =" << a << ".x" << endl;
 		cout << endl;
 		fx = a * x;
 		cout << "x = " << x << endl;
@@ -149,35 +144,39 @@ public:
 
 private:
 	double a;
-	Funcao *fe;
-	double fx;
-	//double xvalue;
+	Funcao *f;
 };
 //------------------------------------------------------
 class Seno: public Funcao {
 public:
-	Seno() {
+	Seno(): value(1), f(0) {
 	}
 	Seno(double v) :
-			value(v) {
+			value(v), f(0) {
 	}
-	Seno(Funcao *f) :
-			fs(f) {
+	Seno(Funcao *func) :
+			value(1), f(func) {
 	}
-	Seno(double v, Funcao *f) :
-			value(v), fs(f) {
+	Seno(double v, Funcao *func) :
+			value(v), f(func) {
 	}
 
 	double operator()(double x) {
-		cout << "f(" << x << ")= sen(" << x << ")" << endl;
-		value = sin(x);
-		cout << "f(" << x << ")= " << value << endl;
-		return value;
+
+		double fx = 0;
+		if(f!= NULL)
+		{
+			x = f->operator()(x);
+		}
+		cout << "f(" << x << ")= "<< value<<".sen(" << x << ")" << endl;
+		fx = sin(x);
+		cout << "f(" << x << ")= " << fx << endl;
+		return fx;
 	}
 
 private:
 	double value;
-	Funcao *fs;
+	Funcao *f;
 
 };
 
@@ -185,29 +184,35 @@ private:
 
 class Cosseno: public Funcao {
 public:
-	Cosseno() {
+	Cosseno(): value(1), f(0) {
 	}
 	Cosseno(double v) :
-			value(v) {
+			value(v), f(0) {
 	}
-	Cosseno(Funcao *f) :
-			fc(f) {
+	Cosseno(Funcao *func) :
+			value(1), f(func) {
 	}
-	Cosseno(double v, Funcao *f) :
-			value(v), fc(f) {
+	Cosseno(double v, Funcao *func) :
+			value(v), f(func) {
 	}
 
 	double operator()(double x) {
-		cout << "f(" << x << ")= cos(" << x << ")" << endl;
-		value = cos(x);
-		cout << "f(" << x << ")= " << value << endl;
-		return value;
+
+		double fx = 0;
+		if(f!= NULL)
+		{
+					x = f->operator()(x);
+		}
+
+		cout << "f(" << x << ")= "<<value<<".cos(" << x << ")" << endl;
+		fx = value*cos(x);
+		cout << "f(" << x << ")= " << fx << endl;
+		return fx;
 	}
 
 private:
 	double value;
-	Funcao *fc;
-
+	Funcao *f;
 };
 
 //-----------------------------------------------------
@@ -215,23 +220,25 @@ private:
 class Potencial: public Funcao {
 public:
 
-	Potencial(): a(0), fp(0){
+	Potencial(): a(0), f(0){
 	}
 	Potencial(double v) :
-			a(v),fp(0) {
+			a(v),f(0) {
 
 	}
-	Potencial(Funcao *f) :
-			fp(f) {
+	Potencial(Funcao *func) :
+			a(0), f(func) {
 	}
-	Potencial(double v, Funcao *f) :
-			a(v), fp(f) {
+	Potencial(double v, Funcao *func) :
+			a(v), f(func) {
 	}
 
 	double operator()(double x) {
 
-		if (fp != NULL) {
-			x = fp->operator()(x);
+		double fx = 0;
+
+		if (f != NULL) {
+			x = f->operator()(x);
 		}
 		cout << "f(x) = x^" << a << endl;
 		cout << "f(" << x << ")= " << x << "^" << a << endl;
@@ -242,9 +249,9 @@ public:
 	}
 
 private:
-	double fx;
+
 	double a;
-	Funcao *fp;
+	Funcao *f;
 
 };
 
@@ -256,16 +263,24 @@ public:
 	Exponencial() {
 	}
 	Exponencial(double v) :
-			a(v) {
+			a(v), f(0) {
 	}
-	Exponencial(Funcao *f) :
-			fexp(f) {
+	Exponencial(Funcao *func) :
+			f(func) {
 	}
-	Exponencial(double v, Funcao *f) :
-			a(v), fexp(f) {
+	Exponencial(double v, Funcao *func) :
+			a(v), f(func) {
 	}
 
 	double operator()(double x) {
+
+		double fx = 0;
+		if(f!= NULL)
+		{
+			x = f->operator()(x);
+		}
+
+
 		cout << "f(x) = " << a << "^x" << endl;
 		cout << "f(" << x << ")= " << a << "^" << x << endl;
 		fx = pow(a, x);
@@ -275,9 +290,9 @@ public:
 	}
 
 private:
-	double fx;
+
 	double a;
-	Funcao *fexp;
+	Funcao *f;
 
 };
 
@@ -300,10 +315,10 @@ int main() {
 	x0 = 0;
 	x1 = 5;
 	step = 0.0001;
-	//Seno s;
-	//s(0);
+	Seno s(&e);
+	s(1);
 	//fa.agrega(&s);
-	//Cosseno c;
+	//Cosseno c(1);
 	//c(0);
 	//fa.agrega(&c);
 	//Potencial p(2); // se colocar 0 ele gera um erro: call of overloaded 'Potencial(int)' is ambiguous
