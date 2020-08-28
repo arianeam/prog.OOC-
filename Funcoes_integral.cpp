@@ -301,34 +301,32 @@ private:
 int main() {
 
 	double x0, x1, step;
-
-	Constante j(8);
-	//j(10.50);
-	Potencial po(2);
-	//po(3);
-	Escalar e(&po,3); //3x^2
-	e(3);
-	//FuncaoAgregada fa;
-	//fa.agrega(&j);
-	//fa.agrega(&e);
-	 //fa(2);
 	x0 = 0;
-	x1 = 5;
-	step = 0.0001;
-	Seno s(&e);
-	s(1);
-	//fa.agrega(&s);
-	//Cosseno c(1);
-	//c(0);
-	//fa.agrega(&c);
-	//Potencial p(2); // se colocar 0 ele gera um erro: call of overloaded 'Potencial(int)' is ambiguous
-	//p(3);
-	//fa.agrega(&p);
-	//Exponencial expo(2);
-	//expo(2);
-	//fa.agrega(&expo);
+		x1 = 5;
+		step = 0.0001;
 
-	//Funcao::integrar(&fa, x0, x1, step);
+	Escalar a(new Potencial(2), 1);
+	Constante b(5);
+	FuncaoAgregada f;
+	f.agrega(&a);
+	f.agrega(&b);
+
+	Escalar c(2);
+	Constante d(-1);
+	FuncaoAgregada e;
+	e.agrega(&c);
+	e.agrega(&d);
+
+	Seno s(&e);
+	Escalar h(&s,5);
+	FuncaoAgregada i;
+	i.agrega(&h);
+
+	FuncaoAgregada m;
+	m.agrega(&f);
+	m.agrega(&i);
+
+	Funcao::integrar(&m, 0, 5, 0.01);
 
 	return 0;
 }
