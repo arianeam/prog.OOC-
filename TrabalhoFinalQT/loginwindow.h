@@ -7,6 +7,7 @@
 #include <principalwindow.h>
 #include <QDebug>
 #include <QTimer>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class LoginWindow; }

@@ -17,7 +17,7 @@ LoginWindow::LoginWindow(QWidget *parent)
       ui->statuslabel->setText("Erro ao abrir o banco de dados!");
 
     }else{
-         ui->statuslabel->setText("Banco de dados aberto com sucesso!");
+         ui->statuslabel->clear();
     }
 
 }
@@ -50,6 +50,7 @@ void LoginWindow::on_pushButton_clicked()
         }
 
         if(cont>0){
+            QMessageBox::information(this,"","Login efetuado com sucesso!");
             this->close();
             errosLogin = 0;
             principalwindow p;
@@ -57,7 +58,7 @@ void LoginWindow::on_pushButton_clicked()
             p.exec();
         }else{
             errosLogin++;
-            ui->statuslabel->setText("Login inválido!");
+             QMessageBox::information(this,"","Login inválido!");
             ui->senhalineEdit->clear();
             ui->loginlineEdit->clear();
             ui->loginlineEdit->setFocus();
