@@ -7,7 +7,7 @@ LoginWindow::LoginWindow(QWidget *parent)
 {
     ui->setupUi(this);
     QSqlDatabase bd_acervo = QSqlDatabase::addDatabase("QSQLITE");
-    bd_acervo.setDatabaseName("C:/Users/PICHAU/Documents/programas_QT/acervo_livros/acervo");
+    bd_acervo.setDatabaseName("C:/Users/PICHAU/Documents/programas_QT/acervo_livros/acervo.db");
 }
 
 LoginWindow::~LoginWindow()
