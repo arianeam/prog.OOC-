@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QtSql>
 #include <QFileInfo>
+#include <principalwindow.h>
+#include <QDebug>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class LoginWindow; }
@@ -16,6 +18,9 @@ class LoginWindow : public QMainWindow
 public:
     LoginWindow(QWidget *parent = nullptr);
     ~LoginWindow();
+
+private slots:
+    void on_pushButton_clicked();
 
 private:
     Ui::LoginWindow *ui;
