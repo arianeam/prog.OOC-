@@ -38,4 +38,24 @@ void LoginWindow::on_pushButton_clicked()
     }
 
     QSqlQuery query;
+    if(query.exec("select * from tb_login where login='"+username+"' and senha='"+senha+"'")){
+
+        int cont = 0;
+        while(query.next())
+        {
+            cont++;
+        }
+
+        if(cont>0){
+            this->close();
+            principalwindow p;
+            p.setModal(true);
+            p.exec();
+        }else{
+            ui->statuslabel->setText("Login inválido!");
+            ui->senhalineEdit->clear();
+            ui->loginlineEdit->clear();
+            ui->loginlineEdit->setFocus();
+        }
+    }
 }
