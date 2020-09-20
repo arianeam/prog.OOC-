@@ -26,14 +26,14 @@ public:
 
 	static double integrar(Funcao *f, double x0, double x1, double step) {
 
-		/*Integral = (step/2).(f(x0) + 2.soma(f(xi)) + f(xn)) , sendo i=1 até i=n-1*/
+		/*Integral = (step/2).(f(x0) + 2.soma(f(xi)) + f(xn)) , sendo i=1 atÃ© i=n-1*/
 
 		double soma, fx0, fxn, x = x0;
 		double k = x0 + step;
 
 		cout << endl;
 		cout << "Passo: " << step << endl;
-		cout << "Intervalo de integração : [" << x0 << "," << x1 << "]" << endl;
+		cout << "Intervalo de integraÃ§Ã£o : [" << x0 << "," << x1 << "]" << endl;
 		cout << endl;
 
 		while (x <= x1)
@@ -277,8 +277,8 @@ int main() {
 void teste() {
 
 	double step = 0.01, x0 = 0.0, x1 = 5.0;
-	/* Com um step maior a precisão da integral aumenta
-	 Para a seguinte funcao um step de 0.001 já alcança o valor da integral calculada
+	/* Com um step maior a precisÃ£o da integral aumenta
+	 Para a seguinte funcao um step de 0.001 jÃ¡ alcanÃ§a o valor da integral calculada
 	 de forma manual */
 
 	Potencial a(2); //x^2
