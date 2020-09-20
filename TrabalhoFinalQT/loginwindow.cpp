@@ -2,7 +2,7 @@
 #include "ui_loginwindow.h"
 
  static QSqlDatabase bd_acervo = QSqlDatabase::addDatabase("QSQLITE");
- static int erros = 0;
+ static int errosLogin = 0;
 
 LoginWindow::LoginWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -51,25 +51,26 @@ void LoginWindow::on_pushButton_clicked()
 
         if(cont>0){
             this->close();
-            erros = 0;
+            errosLogin = 0;
             principalwindow p;
             p.setModal(true);
             p.exec();
         }else{
-            erros++;
+            errosLogin++;
             ui->statuslabel->setText("Login inválido!");
             ui->senhalineEdit->clear();
             ui->loginlineEdit->clear();
             ui->loginlineEdit->setFocus();
-            if(erros==3)
+            if(errosLogin==5)
             {
-                ui->statuslabel->setText("3 erros consecutivos! Aguarde 5 min! ");
+                ui->statuslabel->setText("5 erros consecutivos! Aguarde 5 min! ");
                 ui->pushButton->hide();
                 QTimer::singleShot(300000, ui->pushButton, SLOT(show()));
 
             }
+
         }
 
-
     }
+
 }
