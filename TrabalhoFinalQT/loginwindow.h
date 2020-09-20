@@ -6,6 +6,7 @@
 #include <QFileInfo>
 #include <principalwindow.h>
 #include <QDebug>
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class LoginWindow; }
