@@ -52,7 +52,6 @@ void LoginWindow::on_pushButton_clicked()
         if(cont>0){
             QMessageBox::information(this,"","Login efetuado com sucesso!");
             this->close();
-            errosLogin = 0;
             principalwindow p;
             p.setModal(true);
             p.exec();
@@ -65,8 +64,9 @@ void LoginWindow::on_pushButton_clicked()
             if(errosLogin==5)
             {
                 ui->statuslabel->setText("5 erros consecutivos! Aguarde 5 min! ");
-                ui->pushButton->hide();
-                QTimer::singleShot(300000, ui->pushButton, SLOT(show()));
+                ui->pushButton->setDisabled(true);
+                QTimer::singleShot(300000,this, SLOT(enablePushButton()));
+                errosLogin = 0;
 
             }
 
@@ -74,4 +74,8 @@ void LoginWindow::on_pushButton_clicked()
 
     }
 
+}
+
+void LoginWindow:: enablePushButton(){
+    ui->pushButton->setEnabled(true);
 }
