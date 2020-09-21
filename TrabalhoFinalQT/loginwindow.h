@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QtSql>
 #include <QFileInfo>
-#include <principalwindow.h>
+#include <mainwindow.h>
 #include <QDebug>
 #include <QTimer>
 #include <QMessageBox>

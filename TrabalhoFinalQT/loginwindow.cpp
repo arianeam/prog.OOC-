@@ -52,9 +52,9 @@ void LoginWindow::on_pushButton_clicked()
         if(cont>0){
             QMessageBox::information(this,"","Login efetuado com sucesso!");
             this->close();
-            principalwindow p;
-            p.setModal(true);
-            p.exec();
+            Mainwindow m;
+            m.setModal(true);
+            m.exec();
         }else{
             errosLogin++;
              QMessageBox::information(this,"","Login inválido!");
