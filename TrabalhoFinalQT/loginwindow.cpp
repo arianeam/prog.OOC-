@@ -1,8 +1,8 @@
 #include "loginwindow.h"
 #include "ui_loginwindow.h"
 
- static QSqlDatabase bd_acervo = QSqlDatabase::addDatabase("QSQLITE");
- static int errosLogin = 0;
+static QSqlDatabase bd_acervo = QSqlDatabase::addDatabase("QSQLITE");
+static int errosLogin = 0;
 
 LoginWindow::LoginWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,10 +14,10 @@ LoginWindow::LoginWindow(QWidget *parent)
     if(!bd_acervo.open())
     {
 
-      ui->statuslabel->setText("Erro ao abrir o banco de dados!");
+        ui->statuslabel->setText("Erro ao abrir o banco de dados!");
 
     }else{
-         ui->statuslabel->clear();
+        ui->statuslabel->clear();
     }
 
 }
@@ -34,7 +34,7 @@ void LoginWindow::on_pushButton_clicked()
     QString senha = ui->senhalineEdit->text();
 
     if(!bd_acervo.isOpen()){
-        qDebug()<<"Banco de dados não foi aberto!";
+        QMessageBox::information(this,"","Erro ao abrir banco de dados!");
         return;
     }
 
@@ -57,7 +57,7 @@ void LoginWindow::on_pushButton_clicked()
             m.exec();
         }else{
             errosLogin++;
-             QMessageBox::information(this,"","Login inválido!");
+            QMessageBox::information(this,"","Login inválido!");
             ui->senhalineEdit->clear();
             ui->loginlineEdit->clear();
             ui->loginlineEdit->setFocus();

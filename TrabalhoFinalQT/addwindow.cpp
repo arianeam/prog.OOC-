@@ -13,7 +13,34 @@ addwindow::~addwindow()
     delete ui;
 }
 
-void addwindow::on_addbuttonBox_accepted()
-{
 
+void addwindow::on_gravarBtn_clicked()
+{
+    QString obra = ui->obralineEdit->text();
+    QString autor = ui->autorlineEdit->text();
+    QString edicao = ui->edicaolineEdit->text();
+    QString quantidade = ui->qntdlineEdit->text();
+    QString secao = ui->secaolineEdit->text();
+    QString prateleira = ui->prateleiralineEdit->text();
+
+    QSqlQuery query;
+
+    query.prepare("insert into tb_acervo (obra,autor,edicao,quantidade,secao,prateleira) values"
+                  "('"+obra+"','"+autor+"','"+edicao+"','"+quantidade+"','"+secao+"','"+prateleira+"')");
+
+    if(query.exec()){
+         QMessageBox::information(this,"","Dados inseridos com sucesso!");
+
+         ui->obralineEdit->clear();
+         ui->autorlineEdit->clear();
+         ui->edicaolineEdit->clear();
+         ui->qntdlineEdit->clear();
+         ui->secaolineEdit->clear();
+         ui->prateleiralineEdit->clear();
+         ui->obralineEdit->setFocus();
+    }else{
+
+        QMessageBox::information(this,"","Erro ao inserir dados!");
+
+    }
 }

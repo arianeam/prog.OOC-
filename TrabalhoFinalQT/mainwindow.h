@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <configwindow.h>
 #include <addwindow.h>
+#include <loginwindow.h>
 
 namespace Ui {
 class Mainwindow;

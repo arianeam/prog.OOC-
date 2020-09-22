@@ -2,6 +2,7 @@
 #define ADDWINDOW_H
 
 #include <QDialog>
+#include <loginwindow.h>
 
 namespace Ui {
 class addwindow;
@@ -16,7 +17,8 @@ public:
     ~addwindow();
 
 private slots:
-    void on_addbuttonBox_accepted();
+
+    void on_gravarBtn_clicked();
 
 private:
     Ui::addwindow *ui;

@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>413</width>
-    <height>339</height>
+    <height>398</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -95,14 +95,33 @@
       </item>
      </layout>
     </item>
-    <item>
-     <widget class="QDialogButtonBox" name="addbuttonBox">
-      <property name="standardButtons">
-       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-      </property>
-     </widget>
-    </item>
    </layout>
+  </widget>
+  <widget class="QPushButton" name="gravarBtn">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>350</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Gravar</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cancelarBtn">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>350</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancelar</string>
+   </property>
   </widget>
  </widget>
  <resources/>
