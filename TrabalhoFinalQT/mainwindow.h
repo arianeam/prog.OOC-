@@ -19,6 +19,8 @@ public:
 
 private slots:
 
+    void on_addBtn_clicked();
+
 private:
     Ui::Mainwindow *ui;
 };

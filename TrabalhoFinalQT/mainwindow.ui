@@ -39,7 +39,7 @@
     <string>Sair</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="adBtn">
+  <widget class="QPushButton" name="addBtn">
    <property name="geometry">
     <rect>
      <x>650</x>
@@ -78,7 +78,7 @@
     <string>Excluir</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>

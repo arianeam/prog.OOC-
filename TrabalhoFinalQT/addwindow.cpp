@@ -12,3 +12,8 @@ addwindow::~addwindow()
 {
     delete ui;
 }
+
+void addwindow::on_addbuttonBox_accepted()
+{
+
+}

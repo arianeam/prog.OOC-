@@ -15,6 +15,9 @@ public:
     explicit addwindow(QWidget *parent = nullptr);
     ~addwindow();
 
+private slots:
+    void on_addbuttonBox_accepted();
+
 private:
     Ui::addwindow *ui;
 };

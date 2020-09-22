@@ -14,3 +14,10 @@ Mainwindow::~Mainwindow()
     delete ui;
 }
 
+
+void Mainwindow::on_addBtn_clicked()
+{
+    addwindow a;
+    a.setModal(true);
+    a.exec();
+}
