@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QDialog>
+#include <configwindow.h>
+#include <addwindow.h>
 
 namespace Ui {
 class Mainwindow;
@@ -14,6 +16,8 @@ class Mainwindow : public QDialog
 public:
     explicit Mainwindow(QWidget *parent = nullptr);
     ~Mainwindow();
+
+private slots:
 
 private:
     Ui::Mainwindow *ui;
