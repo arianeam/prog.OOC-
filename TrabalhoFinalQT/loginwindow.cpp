@@ -36,8 +36,9 @@ void LoginWindow::on_pushButton_clicked()
     }
 
     QSqlQuery query;
+    query.prepare("select * from tb_login where login='"+username+"' and senha='"+senha+"'");
 
-    if(query.exec("select * from tb_login where login='"+username+"' and senha='"+senha+"'")){
+    if(query.exec()){
 
         int cont = 0;
 

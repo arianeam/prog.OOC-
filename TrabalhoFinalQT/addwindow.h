@@ -2,7 +2,7 @@
 #define ADDWINDOW_H
 
 #include <QDialog>
-#include <loginwindow.h>
+#include "loginwindow.h"
 
 namespace Ui {
 class addwindow;

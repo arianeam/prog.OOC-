@@ -2,9 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QDialog>
-#include <configwindow.h>
-#include <addwindow.h>
-#include <loginwindow.h>
+#include "configwindow.h"
+#include "addwindow.h"
+#include "loginwindow.h"
 
 namespace Ui {
 class Mainwindow;
@@ -23,6 +23,8 @@ private slots:
     void on_addBtn_clicked();
 
     void on_listarBtn_clicked();
+
+    void on_pesquisaBtn_clicked();
 
 private:
     Ui::Mainwindow *ui;
