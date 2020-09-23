@@ -13,11 +13,8 @@ LoginWindow::LoginWindow(QWidget *parent)
 
     if(!bd_acervo.open())
     {
+        QMessageBox::warning(this,"ERRO","Erro ao abrir banco de dados!");
 
-        ui->statuslabel->setText("Erro ao abrir o banco de dados!");
-
-    }else{
-        ui->statuslabel->clear();
     }
 
 }
@@ -34,7 +31,7 @@ void LoginWindow::on_pushButton_clicked()
     QString senha = ui->senhalineEdit->text();
 
     if(!bd_acervo.isOpen()){
-        QMessageBox::information(this,"","Erro ao abrir banco de dados!");
+        QMessageBox::warning(this,"ERRO","Erro ao abrir banco de dados!");
         return;
     }
 

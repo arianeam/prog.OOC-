@@ -40,7 +40,7 @@ void addwindow::on_gravarBtn_clicked()
          ui->obralineEdit->setFocus();
     }else{
 
-        QMessageBox::information(this,"","Erro ao inserir dados!");
+        QMessageBox::warning(this,"ERRO","Erro ao inserir dados!");
 
     }
 }

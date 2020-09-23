@@ -22,6 +22,8 @@ private slots:
 
     void on_addBtn_clicked();
 
+    void on_listarBtn_clicked();
+
 private:
     Ui::Mainwindow *ui;
 };
