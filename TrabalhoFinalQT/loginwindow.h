@@ -23,8 +23,8 @@ public:
     ~LoginWindow();
 
 private slots:
-    void on_pushButton_clicked();
-    void enablePushButton();
+    void on_loginBtn_clicked();
+    void enableloginBtn();
 
 private:
     Ui::LoginWindow *ui;

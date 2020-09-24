@@ -72,7 +72,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
          <widget class="QLineEdit" name="obralineEdit"/>
         </item>

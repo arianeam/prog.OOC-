@@ -25,7 +25,7 @@ LoginWindow::~LoginWindow()
 }
 
 
-void LoginWindow::on_pushButton_clicked()
+void LoginWindow::on_loginBtn_clicked()
 {
     QString username = ui->loginlineEdit->text();
     QString senha = ui->senhalineEdit->text();
@@ -62,8 +62,8 @@ void LoginWindow::on_pushButton_clicked()
             if(errosLogin==5)
             {
                 ui->statuslabel->setText("5 erros consecutivos! Aguarde 5 min! ");
-                ui->pushButton->setDisabled(true);
-                QTimer::singleShot(300000,this, SLOT(enablePushButton()));
+                ui->loginBtn->setDisabled(true);
+                QTimer::singleShot(300000,this, SLOT(enableloginBtn()));
                 errosLogin = 0;
 
             }
@@ -74,6 +74,9 @@ void LoginWindow::on_pushButton_clicked()
 
 }
 
-void LoginWindow:: enablePushButton(){
-    ui->pushButton->setEnabled(true);
+void LoginWindow:: enableloginBtn(){
+
+    ui->loginBtn->setEnabled(true);
 }
+
+

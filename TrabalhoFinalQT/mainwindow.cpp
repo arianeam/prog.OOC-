@@ -108,5 +108,23 @@ void Mainwindow::on_pesquisaBtn_clicked()
 
 void Mainwindow::on_excluirBtn_clicked()
 {
+ int linha= ui->tableWidget->currentRow();
+ QString id= ui->tableWidget->item(linha,0)->text();
+ QSqlQuery query;
+  query.prepare("delete from tb_acervo where id='"+id+"'");
 
+  if(query.exec()){
+
+      ui->tableWidget->removeRow(linha);
+      QMessageBox::information(this,"","Item excluído com sucesso!");
+
+  }else{
+
+      QMessageBox::warning(this,"ERRO","Erro ao excluir item!");
+  }
+}
+
+void Mainwindow::on_sairBtn_clicked()
+{
+    this->close();
 }

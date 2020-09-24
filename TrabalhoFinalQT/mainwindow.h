@@ -28,6 +28,8 @@ private slots:
 
     void on_excluirBtn_clicked();
 
+    void on_sairBtn_clicked();
+
 private:
     Ui::Mainwindow *ui;
 };
