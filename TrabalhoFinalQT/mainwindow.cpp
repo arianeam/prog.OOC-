@@ -67,7 +67,8 @@ void Mainwindow::on_pesquisaBtn_clicked()
 
     QString pesquisar = ui->pesquisarlineEdit->text();
 
-    query.prepare("select * from tb_acervo where id='"+pesquisar+"' or obra='"+pesquisar+"' or autor='"+pesquisar+"'");
+    query.prepare("select * from tb_acervo where id like '%"+pesquisar+"%' or obra like '%"+pesquisar+"%' or autor like'%"+pesquisar+"%'"
+                  "or edicao like'%"+pesquisar+"%' or quantidade like '%"+pesquisar+"%' or secao like '%"+pesquisar+"%' or prateleira like '%"+pesquisar+"%'");
 
     if(query.exec()){
 
