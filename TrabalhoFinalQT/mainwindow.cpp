@@ -128,3 +128,11 @@ void Mainwindow::on_sairBtn_clicked()
 {
     this->close();
 }
+
+void Mainwindow::on_editarBtn_clicked()
+{
+    int linha= ui->tableWidget->currentRow();
+    QString id= ui->tableWidget->item(linha,0)->text();
+    editwindow e(this, id);
+    e.exec();
+}

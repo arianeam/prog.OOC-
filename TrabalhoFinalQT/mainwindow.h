@@ -5,6 +5,7 @@
 #include "configwindow.h"
 #include "addwindow.h"
 #include "loginwindow.h"
+#include "editwindow.h"
 
 namespace Ui {
 class Mainwindow;
@@ -29,6 +30,8 @@ private slots:
     void on_excluirBtn_clicked();
 
     void on_sairBtn_clicked();
+
+    void on_editarBtn_clicked();
 
 private:
     Ui::Mainwindow *ui;

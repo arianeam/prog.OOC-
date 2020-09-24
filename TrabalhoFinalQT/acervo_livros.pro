@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     addwindow.cpp \
     configwindow.cpp \
+    editwindow.cpp \
     main.cpp \
     loginwindow.cpp \
     mainwindow.cpp
@@ -18,12 +19,14 @@ SOURCES += \
 HEADERS += \
     addwindow.h \
     configwindow.h \
+    editwindow.h \
     loginwindow.h \
     mainwindow.h
 
 FORMS += \
     addwindow.ui \
     configwindow.ui \
+    editwindow.ui \
     loginwindow.ui \
     mainwindow.ui
 
