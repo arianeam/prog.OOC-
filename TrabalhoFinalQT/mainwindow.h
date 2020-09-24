@@ -26,6 +26,8 @@ private slots:
 
     void on_pesquisaBtn_clicked();
 
+    void on_excluirBtn_clicked();
+
 private:
     Ui::Mainwindow *ui;
 };

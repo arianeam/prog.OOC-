@@ -85,7 +85,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="excluirBtn">
       <property name="text">
        <string>Excluir</string>
       </property>

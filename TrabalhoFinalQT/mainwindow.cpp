@@ -52,7 +52,8 @@ void Mainwindow::on_listarBtn_clicked()
        QStringList cabecalho = {"Id", "Obra", "Autor", "Edição", "Quantidade", "Seção", "Prateleira"};
        ui->tableWidget->setHorizontalHeaderLabels(cabecalho);
        ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
+       ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+       ui->tableWidget->verticalHeader()->setVisible(false);
 
     }else{
 
@@ -92,9 +93,20 @@ void Mainwindow::on_pesquisaBtn_clicked()
             linha++;
         }
 
+        QStringList cabecalho = {"Id", "Obra", "Autor", "Edição", "Quantidade", "Seção", "Prateleira"};
+        ui->tableWidget->setHorizontalHeaderLabels(cabecalho);
+        ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+        ui->tableWidget->verticalHeader()->setVisible(false);
+
     }else{
 
         QMessageBox::warning(this,"ERRO","Erro ao efetuar pesquisa!");
 
     }
+}
+
+void Mainwindow::on_excluirBtn_clicked()
+{
+
 }
