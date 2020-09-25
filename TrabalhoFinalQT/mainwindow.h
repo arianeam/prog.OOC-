@@ -33,6 +33,8 @@ private slots:
 
     void on_editarBtn_clicked();
 
+    void on_pesquisarlineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::Mainwindow *ui;
 };

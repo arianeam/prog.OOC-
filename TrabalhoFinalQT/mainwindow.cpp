@@ -7,6 +7,9 @@ Mainwindow::Mainwindow(QWidget *parent) :
     ui(new Ui::Mainwindow)
 {
     ui->setupUi(this);
+    ui->pesquisaBtn->setDisabled(true);
+    connect(ui->pesquisarlineEdit, SIGNAL(textChanged(const QString &)),
+                this, SLOT(on_pesquisarlineEdit_textChanged(const QString &)));
 
 }
 
@@ -135,4 +138,9 @@ void Mainwindow::on_editarBtn_clicked()
     QString id= ui->tableWidget->item(linha,0)->text();
     editwindow e(this, id);
     e.exec();
+}
+
+void Mainwindow::on_pesquisarlineEdit_textChanged(const QString &arg1)
+{
+    ui->pesquisaBtn->setEnabled(!arg1.isEmpty());
 }
