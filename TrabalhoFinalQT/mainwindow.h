@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QDialog>
+#include <QtWidgets>
 #include "configwindow.h"
 #include "addwindow.h"
 #include "loginwindow.h"
@@ -34,6 +35,8 @@ private slots:
     void on_editarBtn_clicked();
 
     void on_pesquisarlineEdit_textChanged(const QString &arg1);
+
+    void on_tableWidget_itemClicked(QTableWidgetItem *item);
 
 private:
     Ui::Mainwindow *ui;

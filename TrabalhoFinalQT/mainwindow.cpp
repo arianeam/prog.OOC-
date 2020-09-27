@@ -7,9 +7,14 @@ Mainwindow::Mainwindow(QWidget *parent) :
     ui(new Ui::Mainwindow)
 {
     ui->setupUi(this);
+
     ui->pesquisaBtn->setDisabled(true);
     connect(ui->pesquisarlineEdit, SIGNAL(textChanged(const QString &)),
                 this, SLOT(on_pesquisarlineEdit_textChanged(const QString &)));
+
+    ui->editarBtn->setDisabled(true);
+    connect(ui->tableWidget, SIGNAL(itemClicked(QTableWidgetItem *item)),
+                this, SLOT(on_tableWidget_itemClicked(QTableWidgetItem *item)));
 
 }
 
@@ -72,7 +77,7 @@ void Mainwindow::on_pesquisaBtn_clicked()
     QString pesquisar = ui->pesquisarlineEdit->text();
 
     query.prepare("select * from tb_acervo where id like '%"+pesquisar+"%' or obra like '%"+pesquisar+"%' or autor like'%"+pesquisar+"%'"
-                  "or edicao like'%"+pesquisar+"%' or quantidade like '%"+pesquisar+"%' or secao like '%"+pesquisar+"%' or prateleira like '%"+pesquisar+"%'");
+                  "or edicao like'%"+pesquisar+"%' or quantidade like '%"+QString::number(pesquisar.toInt())+"%' or secao like '%"+pesquisar+"%' or prateleira like '%"+pesquisar+"%'");
 
     if(query.exec()){
 
@@ -143,4 +148,9 @@ void Mainwindow::on_editarBtn_clicked()
 void Mainwindow::on_pesquisarlineEdit_textChanged(const QString &arg1)
 {
     ui->pesquisaBtn->setEnabled(!arg1.isEmpty());
+}
+
+void Mainwindow::on_tableWidget_itemClicked(QTableWidgetItem *item)
+{
+    ui->editarBtn->setEnabled(item->isSelected());
 }

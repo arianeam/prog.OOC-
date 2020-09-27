@@ -26,7 +26,7 @@ void addwindow::on_gravarBtn_clicked()
     QSqlQuery query;
 
     query.prepare("insert into tb_acervo (obra,autor,edicao,quantidade,secao,prateleira) values"
-                  "('"+obra+"','"+autor+"','"+edicao+"','"+quantidade+"','"+secao+"','"+prateleira+"')");
+                  "('"+obra+"','"+autor+"','"+edicao+"','"+QString::number(quantidade.toInt())+"','"+secao+"','"+prateleira+"')");
 
     if(query.exec()){
          QMessageBox::information(this,"","Dados inseridos com sucesso!");

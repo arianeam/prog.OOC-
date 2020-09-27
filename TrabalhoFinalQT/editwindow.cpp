@@ -45,7 +45,7 @@ void editwindow::on_GravarBtn_clicked()
 
     QSqlQuery query;
     query.prepare("update tb_acervo set obra='"+obra+"',autor='"+autor+"',"
-                  "edicao='"+edicao+"',quantidade='"+quantidade+"',secao='"+secao+"', prateleira='"+prateleira+"'"
+                  "edicao='"+edicao+"',quantidade='"+QString::number(quantidade.toInt())+"',secao='"+secao+"', prateleira='"+prateleira+"'"
                    "where id='"+id_acervo+"'");
 
     if(query.exec()){

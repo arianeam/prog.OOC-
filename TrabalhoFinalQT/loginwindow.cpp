@@ -1,7 +1,6 @@
 #include "loginwindow.h"
 #include "ui_loginwindow.h"
 
-static QSqlDatabase bd_acervo = QSqlDatabase::addDatabase("QSQLITE");
 static int errosLogin = 0;
 
 LoginWindow::LoginWindow(QWidget *parent)
@@ -9,7 +8,12 @@ LoginWindow::LoginWindow(QWidget *parent)
     , ui(new Ui::LoginWindow)
 {
     ui->setupUi(this);
-    bd_acervo.setDatabaseName("C:/Users/PICHAU/Documents/programas_QT/acervo_livros/acervo.db");
+
+    QString local = qApp->applicationDirPath();
+    QString bd = local + "/acervo.db";
+    bd_acervo.setDatabaseName(bd);
+
+   // bd_acervo.setDatabaseName("C:/Users/PICHAU/Documents/programas_QT/acervo_livros/acervo.db");
 
     if(!bd_acervo.open())
     {

@@ -19,7 +19,8 @@ class LoginWindow : public QMainWindow
 
 public:
     LoginWindow(QWidget *parent = nullptr);
-    ~LoginWindow();
+    ~LoginWindow();   
+     QSqlDatabase bd_acervo = QSqlDatabase::addDatabase("QSQLITE");
 
 private slots:
     void on_loginBtn_clicked();
