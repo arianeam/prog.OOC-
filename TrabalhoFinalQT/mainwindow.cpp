@@ -65,29 +65,33 @@ Mainwindow::~Mainwindow()
 
 void Mainwindow::on_addBtn_clicked()
 {
+    int linha = ui->tableWidget->rowCount();
     ui->pesquisaBtn->setDisabled(true);
     ui->editarBtn->setDisabled(true);
     ui->excluirBtn->setDisabled(true);
+
     addwindow a;
     a.setModal(true);
     a.exec();
 
     QSqlQuery query;
-    int linha = ui->tableWidget->rowCount();
 
     query.prepare("select * from tb_acervo");
 
     if(query.exec()){
-        query.last();
-        ui->tableWidget->insertRow(linha);
-        ui->tableWidget->setItem(linha,0,new QTableWidgetItem(query.value(0).toString()));
-        ui->tableWidget->setItem(linha,1,new QTableWidgetItem(query.value(1).toString()));
-        ui->tableWidget->setItem(linha,2,new QTableWidgetItem(query.value(2).toString()));
-        ui->tableWidget->setItem(linha,3,new QTableWidgetItem(query.value(3).toString()));
-        ui->tableWidget->setItem(linha,4,new QTableWidgetItem(query.value(4).toString()));
-        ui->tableWidget->setItem(linha,5,new QTableWidgetItem(query.value(5).toString()));
-        ui->tableWidget->setItem(linha,6,new QTableWidgetItem(query.value(6).toString()));
-        ui->tableWidget->setRowHeight(linha,15);
+        while(query.next()){
+
+            ui->tableWidget->insertRow(linha);
+            ui->tableWidget->setItem(linha,0,new QTableWidgetItem(query.value(0).toString()));
+            ui->tableWidget->setItem(linha,1,new QTableWidgetItem(query.value(1).toString()));
+            ui->tableWidget->setItem(linha,2,new QTableWidgetItem(query.value(2).toString()));
+            ui->tableWidget->setItem(linha,3,new QTableWidgetItem(query.value(3).toString()));
+            ui->tableWidget->setItem(linha,4,new QTableWidgetItem(query.value(4).toString()));
+            ui->tableWidget->setItem(linha,5,new QTableWidgetItem(query.value(5).toString()));
+            ui->tableWidget->setItem(linha,6,new QTableWidgetItem(query.value(6).toString()));
+            ui->tableWidget->setRowHeight(linha,15);
+            linha++;
+        }
     }
 
 
@@ -217,6 +221,13 @@ void Mainwindow::on_excluirBtn_clicked()
     QSqlQuery query;
     query.prepare("delete from tb_acervo where id='"+id+"'");
 
+
+    QMessageBox msgBox;
+    msgBox . setInformativeText( "Deseja excluir o item?" );
+    msgBox . setStandardButtons( QMessageBox :: Yes | QMessageBox :: No);
+    msgBox . setDefaultButton( QMessageBox :: Yes); int ret = msgBox .
+            exec ();
+
     if(query.exec()){
 
         ui->tableWidget->removeRow(linha);
@@ -227,6 +238,7 @@ void Mainwindow::on_excluirBtn_clicked()
 
         QMessageBox::warning(this,"ERRO","Erro ao excluir item!");
     }
+
 }
 
 void Mainwindow::on_sairBtn_clicked()
