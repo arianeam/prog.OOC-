@@ -38,9 +38,13 @@ void addwindow::on_gravarBtn_clicked()
          ui->secaolineEdit->clear();
          ui->prateleiralineEdit->clear();
          ui->obralineEdit->setFocus();
+
+
     }else{
 
         QMessageBox::warning(this,"ERRO","Erro ao inserir dados!");
 
     }
+
+
 }
