@@ -221,13 +221,10 @@ void Mainwindow::on_excluirBtn_clicked()
     QSqlQuery query;
     query.prepare("delete from tb_acervo where id='"+id+"'");
 
+    QMessageBox::StandardButton ret = QMessageBox::question(this,"","Deseja excluir item:");
 
-    QMessageBox msgBox;
-    msgBox . setInformativeText( "Deseja excluir o item?" );
-    msgBox . setStandardButtons( QMessageBox :: Yes | QMessageBox :: No);
-    msgBox . setDefaultButton( QMessageBox :: Yes); int ret = msgBox .
-            exec ();
 
+    if(ret==QMessageBox::Yes){
     if(query.exec()){
 
         ui->tableWidget->removeRow(linha);
@@ -237,6 +234,7 @@ void Mainwindow::on_excluirBtn_clicked()
     }else{
 
         QMessageBox::warning(this,"ERRO","Erro ao excluir item!");
+    }
     }
 
 }
