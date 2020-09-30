@@ -59,7 +59,7 @@
      <x>780</x>
      <y>30</y>
      <width>79</width>
-     <height>331</height>
+     <height>411</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -88,6 +88,13 @@
      <widget class="QPushButton" name="excluirBtn">
       <property name="text">
        <string>Excluir</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="excluirTudoBtn">
+      <property name="text">
+       <string>Excluir tudo</string>
       </property>
      </widget>
     </item>

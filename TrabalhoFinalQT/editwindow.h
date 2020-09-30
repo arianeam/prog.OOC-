@@ -21,6 +21,8 @@ public:
 private slots:
     void on_GravarBtn_clicked();
 
+    void on_CancelarBtn_clicked();
+
 private:
     Ui::editwindow *ui;
 };

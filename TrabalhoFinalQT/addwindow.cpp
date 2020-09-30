@@ -48,3 +48,8 @@ void addwindow::on_gravarBtn_clicked()
 
 
 }
+
+void addwindow::on_cancelarBtn_clicked()
+{
+    this->close();
+}

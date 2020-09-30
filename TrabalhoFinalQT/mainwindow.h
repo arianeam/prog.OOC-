@@ -39,6 +39,9 @@ private slots:
 
     void on_tableWidget_itemClicked(QTableWidgetItem *item);
 
+    void insere_linha(int linha, QSqlQuery query);
+
+
 private:
     Ui::Mainwindow *ui;
 };

@@ -20,6 +20,8 @@ private slots:
 
     void on_gravarBtn_clicked();
 
+    void on_cancelarBtn_clicked();
+
 private:
     Ui::addwindow *ui;
 };

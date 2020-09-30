@@ -11,7 +11,7 @@ editwindow::editwindow(QWidget *parent, QString id) :
     id_acervo = id;
 
     QSqlQuery query;
-    query.prepare("select * from tb_acervo where id='"+id+"'");
+    query.prepare("select * from tb_acervo where id='"+QString::number(id.toInt())+"'");
 
     if(query.exec()){
         query.first();
@@ -55,4 +55,9 @@ void editwindow::on_GravarBtn_clicked()
 
         QMessageBox::warning(this,"ERRO","Erro ao gravar item!");
     }
+}
+
+void editwindow::on_CancelarBtn_clicked()
+{
+    this->close();
 }
