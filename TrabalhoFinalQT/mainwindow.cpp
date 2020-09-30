@@ -221,7 +221,7 @@ void Mainwindow::on_excluirBtn_clicked()
     QSqlQuery query;
     query.prepare("delete from tb_acervo where id='"+id+"'");
 
-    QMessageBox::StandardButton ret = QMessageBox::question(this,"","Deseja excluir item:");
+    QMessageBox::StandardButton ret = QMessageBox::question(this,"","Deseja excluir item?");
 
 
     if(ret==QMessageBox::Yes){
@@ -241,7 +241,14 @@ void Mainwindow::on_excluirBtn_clicked()
 
 void Mainwindow::on_sairBtn_clicked()
 {
-    this->close();
+    QMessageBox::StandardButton ret = QMessageBox::question(this,"","Deseja sair?");
+
+
+    if(ret==QMessageBox::Yes){
+       LoginWindow l;
+       l.bd_acervo.close();
+       this->close();
+    }
 }
 
 void Mainwindow::on_editarBtn_clicked()
