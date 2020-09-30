@@ -166,8 +166,8 @@ void Mainwindow::on_pesquisaBtn_clicked()
 
     QString pesquisar = ui->pesquisarlineEdit->text();
 
-    query.prepare("select * from tb_acervo where id like '%"+QString::number(pesquisar.toInt())+"%' or obra like '%"+pesquisar+"%' or autor like'%"+pesquisar+"%'"
-                  "or edicao like'%"+pesquisar+"%' or quantidade like '%"+QString::number(pesquisar.toInt())+"%' or secao like '%"+pesquisar+"%' or prateleira like '%"+pesquisar+"%'");
+    query.prepare("select * from tb_acervo where id like '%"+pesquisar+"%' or obra like '%"+pesquisar+"%' or autor like'%"+pesquisar+"%'"
+                  "or edicao like'%"+pesquisar+"%' or quantidade like '%"+pesquisar+"%' or secao like '%"+pesquisar+"%' or prateleira like '%"+pesquisar+"%'");
 
     if(query.exec()){
 
@@ -176,16 +176,7 @@ void Mainwindow::on_pesquisaBtn_clicked()
 
         while(query.next())
         {
-            ui->tableWidget->insertRow(linha);
-            ui->tableWidget->setItem(linha,0,new QTableWidgetItem(query.value(0).toString()));
-            ui->tableWidget->setItem(linha,1,new QTableWidgetItem(query.value(1).toString()));
-            ui->tableWidget->setItem(linha,2,new QTableWidgetItem(query.value(2).toString()));
-            ui->tableWidget->setItem(linha,3,new QTableWidgetItem(query.value(3).toString()));
-            ui->tableWidget->setItem(linha,4,new QTableWidgetItem(query.value(4).toString()));
-            ui->tableWidget->setItem(linha,5,new QTableWidgetItem(query.value(5).toString()));
-            ui->tableWidget->setItem(linha,6,new QTableWidgetItem(query.value(6).toString()));
-            ui->tableWidget->setRowHeight(linha,15);
-
+            insere_linha(linha,query);
             linha++;
         }
 
@@ -257,16 +248,7 @@ void Mainwindow::on_editarBtn_clicked()
     if(query.exec()){
 
         query.next();
-        ui->tableWidget->setColumnCount(7);
-        ui->tableWidget->insertRow(linha);
-        ui->tableWidget->setItem(linha,0,new QTableWidgetItem(query.value(0).toString()));
-        ui->tableWidget->setItem(linha,1,new QTableWidgetItem(query.value(1).toString()));
-        ui->tableWidget->setItem(linha,2,new QTableWidgetItem(query.value(2).toString()));
-        ui->tableWidget->setItem(linha,3,new QTableWidgetItem(query.value(3).toString()));
-        ui->tableWidget->setItem(linha,4,new QTableWidgetItem(query.value(4).toString()));
-        ui->tableWidget->setItem(linha,5,new QTableWidgetItem(query.value(5).toString()));
-        ui->tableWidget->setItem(linha,6,new QTableWidgetItem(query.value(6).toString()));
-        ui->tableWidget->setRowHeight(linha,15);
+        insere_linha(linha,query);
 
     }else{
 
