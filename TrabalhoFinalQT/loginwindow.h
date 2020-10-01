@@ -7,6 +7,7 @@
 #include "mainwindow.h"
 #include <QTimer>
 #include <QMessageBox>
+#include "login.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class LoginWindow; }
@@ -19,10 +20,8 @@ class LoginWindow : public QMainWindow
 
 public:
     LoginWindow(QWidget *parent = nullptr);
-    ~LoginWindow();   
-     QSqlDatabase bd_acervo = QSqlDatabase::addDatabase("QSQLITE");
-     QString username;
-     QString senha;
+    ~LoginWindow();
+    QSqlDatabase bd_acervo = QSqlDatabase::addDatabase("QSQLITE");
 
 private slots:
     void on_loginBtn_clicked();

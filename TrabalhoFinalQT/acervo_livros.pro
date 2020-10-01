@@ -22,6 +22,7 @@ HEADERS += \
     alterarsenha.h \
     configwindow.h \
     editwindow.h \
+    login.h \
     loginwindow.h \
     mainwindow.h
 

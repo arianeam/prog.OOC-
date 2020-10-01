@@ -7,6 +7,7 @@
 #include "addwindow.h"
 #include "loginwindow.h"
 #include "editwindow.h"
+#include "login.h"
 
 namespace Ui {
 class Mainwindow;
@@ -17,10 +18,9 @@ class Mainwindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit Mainwindow(QWidget *parent = nullptr);
+    explicit Mainwindow(QWidget *parent = nullptr, login* l = NULL);
     ~Mainwindow();
-
-
+     login* Login;
 private slots:
 
     void on_addBtn_clicked();

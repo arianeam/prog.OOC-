@@ -2,11 +2,12 @@
 #include "ui_mainwindow.h"
 #include <QStringList>
 
-Mainwindow::Mainwindow(QWidget *parent) :
+Mainwindow::Mainwindow(QWidget *parent, login* l) :
     QDialog(parent),
     ui(new Ui::Mainwindow)
 {
     ui->setupUi(this);
+    Login = l;
 
     ui->pesquisaBtn->setDisabled(true);
     connect(ui->pesquisarlineEdit, SIGNAL(textChanged(const QString &)),
@@ -286,6 +287,6 @@ void Mainwindow::insere_linha(int linha, QSqlQuery query){
 
 void Mainwindow::on_configBtn_clicked()
 {
-    configwindow c;
+    configwindow c(this, Login);
     c.exec();
 }

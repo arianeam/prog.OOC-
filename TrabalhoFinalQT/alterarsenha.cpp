@@ -11,11 +11,22 @@ alterarSenha::alterarSenha(QWidget *parent) :
     ui->confirmarlineEdit->setDisabled(true);
 
 
+   /* if(senha_atual==senha)
+    {
+        ui->novaSenhalineEdit->setEnabled(true);
+
+    }else{
+
+        ui->avisolabel->setText("Senha incorreta!");
+    }*/
+
 }
 
 alterarSenha::~alterarSenha()
 {
     delete ui;
 }
+
+
 
 

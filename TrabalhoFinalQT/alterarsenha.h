@@ -2,6 +2,7 @@
 #define ALTERARSENHA_H
 
 #include <QDialog>
+#include "loginwindow.h"
 
 namespace Ui {
 class alterarSenha;
@@ -14,6 +15,8 @@ class alterarSenha : public QDialog
 public:
     explicit alterarSenha(QWidget *parent = nullptr);
     ~alterarSenha();
+
+private slots:
 
 private:
     Ui::alterarSenha *ui;
