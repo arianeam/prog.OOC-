@@ -31,8 +31,8 @@ LoginWindow::~LoginWindow()
 
 void LoginWindow::on_loginBtn_clicked()
 {
-    QString username = ui->loginlineEdit->text();
-    QString senha = ui->senhalineEdit->text();
+     username = ui->loginlineEdit->text();
+     senha = ui->senhalineEdit->text();
 
     if(!bd_acervo.isOpen()){
         QMessageBox::warning(this,"ERRO","Erro ao abrir banco de dados!");

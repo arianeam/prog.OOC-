@@ -62,9 +62,7 @@ void Mainwindow::on_addBtn_clicked()
     ui->editarBtn->setDisabled(true);
     ui->excluirBtn->setDisabled(true);
 
-
     addwindow a;
-    a.setModal(true);
     a.exec();
 
     QSqlQuery query;
@@ -285,3 +283,9 @@ void Mainwindow::insere_linha(int linha, QSqlQuery query){
 }
 
 
+
+void Mainwindow::on_configBtn_clicked()
+{
+    configwindow c;
+    c.exec();
+}

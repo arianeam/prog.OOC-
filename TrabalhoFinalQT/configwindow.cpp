@@ -12,3 +12,9 @@ configwindow::~configwindow()
 {
     delete ui;
 }
+
+void configwindow::on_alterarSenhaBtn_clicked()
+{
+      alterarSenha a;
+      a.exec();
+}

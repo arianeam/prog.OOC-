@@ -42,6 +42,8 @@ private slots:
     void insere_linha(int linha, QSqlQuery query);
 
 
+    void on_configBtn_clicked();
+
 private:
     Ui::Mainwindow *ui;
 };

@@ -21,6 +21,8 @@ public:
     LoginWindow(QWidget *parent = nullptr);
     ~LoginWindow();   
      QSqlDatabase bd_acervo = QSqlDatabase::addDatabase("QSQLITE");
+     QString username;
+     QString senha;
 
 private slots:
     void on_loginBtn_clicked();

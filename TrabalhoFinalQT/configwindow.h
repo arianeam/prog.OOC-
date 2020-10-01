@@ -2,6 +2,7 @@
 #define CONFIGWINDOW_H
 
 #include <QDialog>
+#include "alterarsenha.h"
 
 namespace Ui {
 class configwindow;
@@ -14,6 +15,9 @@ class configwindow : public QDialog
 public:
     explicit configwindow(QWidget *parent = nullptr);
     ~configwindow();
+
+private slots:
+    void on_alterarSenhaBtn_clicked();
 
 private:
     Ui::configwindow *ui;

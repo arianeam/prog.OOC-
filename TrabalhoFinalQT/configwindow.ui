@@ -6,13 +6,60 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>544</width>
-    <height>363</height>
+    <width>167</width>
+    <height>306</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>10</y>
+     <width>125</width>
+     <height>271</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="configverticalLayout">
+    <item>
+     <widget class="QPushButton" name="alterarSenhaBtn">
+      <property name="text">
+       <string>Alterar senha</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="alterarUsernameBtn">
+      <property name="text">
+       <string>Alterar nome de usuário</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="newAdmBtn">
+      <property name="text">
+       <string>Novo Administrador</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="excluiruseerBtn">
+      <property name="text">
+       <string>Excluir usuário</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="addUserBtn">
+      <property name="text">
+       <string>Adicionar usuário</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
  </widget>
  <resources/>
  <connections/>
