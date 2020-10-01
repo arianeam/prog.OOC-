@@ -18,6 +18,8 @@ public:
 
 private slots:
 
+    void on_senhaAtuallineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::alterarSenha *ui;
 };

@@ -31,11 +31,8 @@ LoginWindow::~LoginWindow()
 
 void LoginWindow::on_loginBtn_clicked()
 {
-     login l;
      QString username = ui->loginlineEdit->text();
      QString senha = ui->senhalineEdit->text();
-     l.set_senha(senha);
-     l.set_username(username);
 
     if(!bd_acervo.isOpen()){
         QMessageBox::warning(this,"ERRO","Erro ao abrir banco de dados!");
@@ -57,7 +54,7 @@ void LoginWindow::on_loginBtn_clicked()
         if(cont>0){
             QMessageBox::information(this,"","Login efetuado com sucesso!");
             this->close();
-            Mainwindow m(this, &l);
+            Mainwindow m;
             m.setModal(true);
             m.exec();
         }else{

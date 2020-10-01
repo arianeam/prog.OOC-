@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -35,12 +35,16 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="senhaAtuallineEdit"/>
+         <widget class="QLineEdit" name="senhaAtuallineEdit">
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="avisolabel">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -56,7 +60,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="novaSenhalineEdit"/>
+         <widget class="QLineEdit" name="novaSenhalineEdit">
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -70,12 +78,16 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="confirmarlineEdit"/>
+         <widget class="QLineEdit" name="confirmarlineEdit">
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="avisolabel_2">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>

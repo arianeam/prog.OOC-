@@ -9,16 +9,8 @@ alterarSenha::alterarSenha(QWidget *parent) :
 
     ui->novaSenhalineEdit->setDisabled(true);
     ui->confirmarlineEdit->setDisabled(true);
-
-
-   /* if(senha_atual==senha)
-    {
-        ui->novaSenhalineEdit->setEnabled(true);
-
-    }else{
-
-        ui->avisolabel->setText("Senha incorreta!");
-    }*/
+    connect(ui->senhaAtuallineEdit, SIGNAL(textChanged(const QString &)),
+            this, SLOT(on_senhaAtuallineEdit_textChanged(const QString &)));
 
 }
 
@@ -30,3 +22,28 @@ alterarSenha::~alterarSenha()
 
 
 
+
+void alterarSenha::on_senhaAtuallineEdit_textChanged(const QString &arg1)
+{
+    if(!arg1.isEmpty()){
+        QString senha = ui->senhaAtuallineEdit->text();
+
+        QSqlQuery query;
+        query.prepare("select * from tb_login where senha='"+senha+"'");
+
+        if(query.exec()){
+
+            int cont = 0;
+
+            while(query.next())
+            {
+                cont++;
+            }
+
+            if(cont>0){
+                ui->novaSenhalineEdit->setEnabled(true);
+                ui->avisolabel->setText("Insira nova senha");
+            }
+        }
+    }
+}
