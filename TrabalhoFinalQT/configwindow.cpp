@@ -15,6 +15,12 @@ configwindow::~configwindow()
 
 void configwindow::on_alterarSenhaBtn_clicked()
 {
-      alterarSenha a;
-      a.exec();
+    alterarSenha a;
+    a.exec();
+}
+
+void configwindow::on_alterarUsernameBtn_clicked()
+{
+    alterarusername a;
+    a.exec();
 }

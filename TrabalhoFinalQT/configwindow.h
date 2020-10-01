@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "alterarsenha.h"
+#include "alterarusername.h"
 
 namespace Ui {
 class configwindow;
@@ -18,6 +19,8 @@ public:
 
 private slots:
     void on_alterarSenhaBtn_clicked();
+
+    void on_alterarUsernameBtn_clicked();
 
 private:
     Ui::configwindow *ui;
