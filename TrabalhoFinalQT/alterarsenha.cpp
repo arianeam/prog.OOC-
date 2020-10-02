@@ -124,6 +124,8 @@ void alterarSenha::on_saveBtn_clicked()
                 ui->senhaAtuallineEdit->clear();
                 ui->novaSenhalineEdit->clear();
                 ui->confirmarlineEdit->clear();
+                ui->usernamelineEdit->setFocus();
+
 
             }else{
 

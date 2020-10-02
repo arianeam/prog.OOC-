@@ -7,10 +7,8 @@ alterarusername::alterarusername(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->novouser_lineEdit->setDisabled(true);
-    ui->confirmaruser_lineEdit->setDisabled(true);
     ui->SaveBtn->setDisabled(true);
-    ui->Senha_lineEdit->setDisabled(true);
+
     ui->aviso3_label->setText("Insira o nome de usuário atual e a senha");
 
     connect(ui->CancelBtn,SIGNAL(clicked()),this,SLOT(close()));
@@ -21,9 +19,6 @@ alterarusername::~alterarusername()
 {
     delete ui;
 }
-
-
-
 
 void alterarusername::on_Senha_lineEdit_textChanged(const QString &arg1)
 {
@@ -45,11 +40,11 @@ void alterarusername::on_Senha_lineEdit_textChanged(const QString &arg1)
             }
 
             if(cont>0){
-                ui->novouser_lineEdit->setEnabled(true);
+
                 ui->aviso4_label->setText("Insira o novo nome de usuário");
+
             }else{
 
-                ui->novouser_lineEdit->setDisabled(true);
                 ui->aviso4_label->setText("Senha incorreta!");
                 ui->SaveBtn->setDisabled(true);
             }
@@ -65,11 +60,10 @@ void alterarusername::on_novouser_lineEdit_textChanged(const QString &arg1)
 
         if(novo_username.size()>=3){
 
-            ui->confirmaruser_lineEdit->setEnabled(true);
             ui->aviso5_label->setText("Confirme o novo nome de usuário");
+
         }else{
 
-            ui->confirmaruser_lineEdit->setDisabled(true);
             ui->aviso5_label->setText("O nome de usuário deve conter pelo menos 3 caractres!");
             ui->SaveBtn->setDisabled(true);
         }
@@ -88,12 +82,11 @@ void alterarusername::on_confirmaruser_lineEdit_textChanged(const QString &arg1)
 
             ui->SaveBtn->setEnabled(true);
             ui->aviso6_label->setText("Salve as alterações");
+
         }else{
 
             ui->SaveBtn->setDisabled(true);
         }
-
-
     }
 }
 
@@ -105,15 +98,50 @@ void alterarusername::on_SaveBtn_clicked()
 
     QSqlQuery query;
 
-    query.prepare("update tb_login set login='"+novo_username+"' where login='"+username_antigo+"' and senha='"+senha+"'");
+    query.prepare("select * from tb_login where login='"+username_antigo+"' and senha='"+senha+"'");
 
     if(query.exec()){
 
-        QMessageBox::information(this,"","Nome de usuário alterado com suceso!");
-    }else{
+        int cont = 0;
 
-        QMessageBox::warning(this,"ERRO","Erro ao alterar nome de usuário!");
+        while(query.next())
+        {
+            cont++;
+        }
 
+        if(cont>0){
+            query.prepare("update tb_login set login='"+novo_username+"' where login='"+username_antigo+"' and senha='"+senha+"'");
+
+            if(query.exec()){
+
+                QMessageBox::information(this,"","Nome de usuário alterado com suceso!");
+                ui->useratual_lineEdit->clear();
+                ui->Senha_lineEdit->clear();
+                ui->novouser_lineEdit->clear();
+                ui->confirmaruser_lineEdit->clear();
+                ui->useratual_lineEdit->setFocus();
+
+            }else{
+
+                QMessageBox::warning(this,"ERRO","Erro ao alterar nome de usuário!");
+
+                ui->SaveBtn->setDisabled(true);
+                ui->useratual_lineEdit->clear();
+                ui->Senha_lineEdit->clear();
+                ui->novouser_lineEdit->clear();
+                ui->confirmaruser_lineEdit->clear();
+                ui->useratual_lineEdit->setFocus();
+
+            }
+        }else{
+            ui->SaveBtn->setDisabled(true);
+            QMessageBox::warning(this,"","Login inválido!");
+            ui->useratual_lineEdit->clear();
+            ui->Senha_lineEdit->clear();
+            ui->novouser_lineEdit->clear();
+            ui->confirmaruser_lineEdit->clear();
+            ui->useratual_lineEdit->setFocus();
+        }
     }
 }
 
@@ -140,14 +168,13 @@ void alterarusername::on_useratual_lineEdit_textChanged(const QString &arg1)
                 ui->Senha_lineEdit->setEnabled(true);
                 ui->aviso3_label->setText("Insira a senha");
 
-             }else{
+            }else{
 
                 ui->aviso3_label->setText("Nome de usuário inválido");
                 ui->SaveBtn->setDisabled(true);
                 ui->Senha_lineEdit->clear();
                 ui->novouser_lineEdit->clear();
                 ui->confirmaruser_lineEdit->clear();
-                cont = 0;
             }
         }
     }
