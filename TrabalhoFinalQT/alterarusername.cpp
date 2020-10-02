@@ -13,17 +13,7 @@ alterarusername::alterarusername(QWidget *parent) :
     ui->Senha_lineEdit->setDisabled(true);
     ui->aviso3_label->setText("Insira o nome de usuário atual e a senha");
 
-    connect(ui->Senha_lineEdit, SIGNAL(textChanged(const QString &)),
-            this, SLOT(on_Senha_lineEdit_textChanged(const QString &)));
-
-    connect(ui->novouser_lineEdit, SIGNAL(textChanged(const QString &)),
-            this, SLOT(on_novouser_lineEdit_textChanged(const QString &)));
-
-    connect(ui->confirmaruser_lineEdit, SIGNAL(textChanged(const QString &)),
-            this, SLOT(on_confirmaruser_lineEdit_textChanged(const QString &)));
-
-    connect(ui->useratual_lineEdit, SIGNAL(textChanged(const QString &)),
-            this, SLOT(on_useratual_lineEdit_textChanged(const QString &)));
+    connect(ui->CancelBtn,SIGNAL(clicked()),this,SLOT(close()));
 
 }
 
@@ -105,11 +95,6 @@ void alterarusername::on_confirmaruser_lineEdit_textChanged(const QString &arg1)
 
 
     }
-}
-
-void alterarusername::on_CancelBtn_clicked()
-{
-    this->close();
 }
 
 void alterarusername::on_SaveBtn_clicked()

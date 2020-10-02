@@ -24,8 +24,6 @@ private slots:
 
     void on_confirmaruser_lineEdit_textChanged(const QString &arg1);
 
-    void on_CancelBtn_clicked();
-
     void on_SaveBtn_clicked();
 
     void on_useratual_lineEdit_textChanged(const QString &arg1);

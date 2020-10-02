@@ -8,6 +8,9 @@ editwindow::editwindow(QWidget *parent, QString id) :
     ui(new Ui::editwindow)
 {
     ui->setupUi(this);
+
+    ui->GravarBtn->setDisabled(true);
+
     id_acervo = id;
 
     QSqlQuery query;
@@ -27,6 +30,8 @@ editwindow::editwindow(QWidget *parent, QString id) :
         QMessageBox::warning(this,"ERRO","Erro ao editar item!");
 
     }
+
+    connect(ui->CancelarBtn,SIGNAL(clicked()),this,SLOT(close()));
 }
 
 editwindow::~editwindow()
@@ -57,7 +62,16 @@ void editwindow::on_GravarBtn_clicked()
     }
 }
 
-void editwindow::on_CancelarBtn_clicked()
+
+
+void editwindow::on_ObraLineEdit_textChanged(const QString &arg1)
 {
-    this->close();
+  if(arg1.isEmpty()){
+
+      ui->GravarBtn->setDisabled(true);
+      ui->obra_label->setText("Campo obrigatório!");
+  }else{
+
+      ui->GravarBtn->setEnabled(true);
+  }
 }

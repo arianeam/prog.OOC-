@@ -6,6 +6,10 @@ addwindow::addwindow(QWidget *parent) :
     ui(new Ui::addwindow)
 {
     ui->setupUi(this);
+
+    ui->gravarBtn->setDisabled(true);
+
+    connect(ui->cancelarBtn,SIGNAL(clicked()),this,SLOT(close()));
 }
 
 addwindow::~addwindow()
@@ -29,15 +33,15 @@ void addwindow::on_gravarBtn_clicked()
                   "('"+obra+"','"+autor+"','"+edicao+"','"+QString::number(quantidade.toInt())+"','"+secao+"','"+prateleira+"')");
 
     if(query.exec()){
-         QMessageBox::information(this,"","Dados inseridos com sucesso!");
+        QMessageBox::information(this,"","Dados inseridos com sucesso!");
 
-         ui->obralineEdit->clear();
-         ui->autorlineEdit->clear();
-         ui->edicaolineEdit->clear();
-         ui->qntdlineEdit->clear();
-         ui->secaolineEdit->clear();
-         ui->prateleiralineEdit->clear();
-         ui->obralineEdit->setFocus();
+        ui->obralineEdit->clear();
+        ui->autorlineEdit->clear();
+        ui->edicaolineEdit->clear();
+        ui->qntdlineEdit->clear();
+        ui->secaolineEdit->clear();
+        ui->prateleiralineEdit->clear();
+        ui->obralineEdit->setFocus();
 
 
     }else{
@@ -46,10 +50,22 @@ void addwindow::on_gravarBtn_clicked()
 
     }
 
-
 }
 
-void addwindow::on_cancelarBtn_clicked()
+
+void addwindow::on_obralineEdit_textChanged(const QString &arg1)
 {
-    this->close();
+    if(arg1.isEmpty()){
+
+            ui->gravarBtn->setDisabled(true);
+            ui->obralabel_2->setText("Campo obrigatório!");
+
+        }else{
+
+        ui->gravarBtn->setEnabled(true);
+    }
+
+
 }
+
+

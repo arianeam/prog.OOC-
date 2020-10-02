@@ -10,16 +10,9 @@ Mainwindow::Mainwindow(QWidget *parent) :
     ui->setupUi(this);
 
     ui->pesquisaBtn->setDisabled(true);
-    connect(ui->pesquisarlineEdit, SIGNAL(textChanged(const QString &)),
-            this, SLOT(on_pesquisarlineEdit_textChanged(const QString &)));
-
     ui->editarBtn->setDisabled(true);
-    connect(ui->tableWidget, SIGNAL(itemClicked(QTableWidgetItem *item)),
-            this, SLOT(on_tableWidget_itemClicked(QTableWidgetItem *item)));
-
     ui->excluirBtn->setDisabled(true);
-    connect(ui->tableWidget, SIGNAL(itemClicked(QTableWidgetItem *item)),
-            this, SLOT(on_tableWidget_itemClicked(QTableWidgetItem *item)));
+
 
     int linha = 0;
     QSqlQuery query;
@@ -32,7 +25,7 @@ Mainwindow::Mainwindow(QWidget *parent) :
 
         while(query.next())
         {
-          insere_linha(linha,query);
+            insere_linha(linha,query);
             linha++;
         }
 
@@ -41,6 +34,8 @@ Mainwindow::Mainwindow(QWidget *parent) :
         ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
         ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
         ui->tableWidget->verticalHeader()->setVisible(false);
+        ui->tableWidget->setColumnWidth(0,30);
+       // ui->tableWidget->setColumnWidth(0,30);
 
     }else{
 
@@ -93,7 +88,7 @@ void Mainwindow::on_addBtn_clicked()
             linha++;
         }
 
-}
+    }
 }
 
 void Mainwindow::on_listarBtn_clicked()
@@ -129,12 +124,6 @@ void Mainwindow::on_listarBtn_clicked()
             linha++;
         }
 
-        QStringList cabecalho = {"Id", "Obra", "Autor", "Edição", "Quantidade", "Seção", "Prateleira"};
-        ui->tableWidget->setHorizontalHeaderLabels(cabecalho);
-        ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
-        ui->tableWidget->verticalHeader()->setVisible(false);
-
     }else{
 
         QMessageBox::warning(this,"ERRO","Erro ao listar acervo!");
@@ -166,7 +155,7 @@ void Mainwindow::on_pesquisaBtn_clicked()
     QString pesquisar = ui->pesquisarlineEdit->text();
 
     query.prepare("select * from tb_acervo where id like '%"+pesquisar+"%' or obra like '%"+pesquisar+"%' or autor like'%"+pesquisar+"%'"
-                  "or edicao like'%"+pesquisar+"%' or quantidade like '%"+pesquisar+"%' or secao like '%"+pesquisar+"%' or prateleira like '%"+pesquisar+"%'");
+                                                                                                                                     "or edicao like'%"+pesquisar+"%' or quantidade like '%"+pesquisar+"%' or secao like '%"+pesquisar+"%' or prateleira like '%"+pesquisar+"%'");
 
     if(query.exec()){
 
@@ -178,12 +167,6 @@ void Mainwindow::on_pesquisaBtn_clicked()
             insere_linha(linha,query);
             linha++;
         }
-
-        QStringList cabecalho = {"Id", "Obra", "Autor", "Edição", "Quantidade", "Seção", "Prateleira"};
-        ui->tableWidget->setHorizontalHeaderLabels(cabecalho);
-        ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
-        ui->tableWidget->verticalHeader()->setVisible(false);
 
     }else{
 
@@ -205,16 +188,16 @@ void Mainwindow::on_excluirBtn_clicked()
 
 
     if(ret==QMessageBox::Yes){
-    if(query.exec()){
+        if(query.exec()){
 
-        ui->tableWidget->removeRow(linha);
+            ui->tableWidget->removeRow(linha);
 
-        QMessageBox::information(this,"","Item excluído com sucesso!");
+            QMessageBox::information(this,"","Item excluído com sucesso!");
 
-    }else{
+        }else{
 
-        QMessageBox::warning(this,"ERRO","Erro ao excluir item!");
-    }
+            QMessageBox::warning(this,"ERRO","Erro ao excluir item!");
+        }
     }
 
 }
@@ -225,9 +208,9 @@ void Mainwindow::on_sairBtn_clicked()
 
 
     if(ret==QMessageBox::Yes){
-       LoginWindow l;
-       l.bd_acervo.close();
-       this->close();
+        LoginWindow l;
+        l.bd_acervo.close();
+        this->close();
     }
 }
 
@@ -269,6 +252,12 @@ void Mainwindow::on_tableWidget_itemClicked(QTableWidgetItem *item)
     ui->excluirBtn->setEnabled(item->isSelected());
 }
 
+void Mainwindow::on_configBtn_clicked()
+{
+    configwindow c;
+    c.exec();
+}
+
 void Mainwindow::insere_linha(int linha, QSqlQuery query){
 
     ui->tableWidget->insertRow(linha);
@@ -281,11 +270,4 @@ void Mainwindow::insere_linha(int linha, QSqlQuery query){
     ui->tableWidget->setItem(linha,6,new QTableWidgetItem(query.value(6).toString()));
     ui->tableWidget->setRowHeight(linha,15);
 
-}
-
-
-void Mainwindow::on_configBtn_clicked()
-{
-    configwindow c;
-    c.exec();
 }

@@ -21,7 +21,7 @@ public:
 private slots:
     void on_GravarBtn_clicked();
 
-    void on_CancelarBtn_clicked();
+    void on_ObraLineEdit_textChanged(const QString &arg1);
 
 private:
     Ui::editwindow *ui;

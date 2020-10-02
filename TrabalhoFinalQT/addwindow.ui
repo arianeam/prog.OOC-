@@ -6,27 +6,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>413</width>
-    <height>398</height>
+    <width>583</width>
+    <height>429</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>10</x>
      <y>10</y>
-     <width>371</width>
-     <height>321</height>
+     <width>561</width>
+     <height>401</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_3">
+   <layout class="QVBoxLayout" name="verticalLayout_7">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout">
+       <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QLabel" name="obralabel">
           <property name="text">
@@ -35,6 +35,24 @@
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="obralabel_2">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="obralineEdit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
          <widget class="QLabel" name="autorlabel">
           <property name="text">
            <string>Autor:</string>
@@ -42,12 +60,37 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="edicaolabel">
+         <widget class="QLabel" name="autorlabel_2">
           <property name="text">
-           <string>Edição: </string>
+           <string/>
           </property>
          </widget>
         </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="autorlineEdit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_6">
+      <item>
+       <widget class="QLabel" name="edicaolabel">
+        <property name="text">
+         <string>Edição: </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="edicaolineEdit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
          <widget class="QLabel" name="qntdlabel">
           <property name="text">
@@ -56,6 +99,24 @@
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="qntdlabel_2">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="qntdlineEdit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
          <widget class="QLabel" name="secaolabel">
           <property name="text">
            <string>Seção:</string>
@@ -63,65 +124,65 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="prateleiralabel">
+         <widget class="QLabel" name="secaolabel_2">
           <property name="text">
-           <string>Prateleira:</string>
+           <string/>
           </property>
          </widget>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QLineEdit" name="obralineEdit"/>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="autorlineEdit"/>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="edicaolineEdit"/>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="qntdlineEdit"/>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="secaolineEdit"/>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="prateleiralineEdit"/>
-        </item>
-       </layout>
+       <widget class="QLineEdit" name="secaolineEdit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="prateleiralabel">
+        <property name="text">
+         <string>Prateleira:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="prateleiralineEdit"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="gravarBtn">
+        <property name="text">
+         <string>Salvar</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cancelarBtn">
+        <property name="text">
+         <string>Cancelar</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
    </layout>
-  </widget>
-  <widget class="QPushButton" name="gravarBtn">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>350</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Salvar</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cancelarBtn">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>350</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Cancelar</string>
-   </property>
   </widget>
  </widget>
  <resources/>

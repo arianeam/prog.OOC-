@@ -13,17 +13,7 @@ alterarSenha::alterarSenha(QWidget *parent) :
     ui->senhaAtuallineEdit->setDisabled(true);
     ui->aviso7_label->setText("Insira o nome de usuário e senha atual");
 
-    connect(ui->senhaAtuallineEdit, SIGNAL(textChanged(const QString &)),
-            this, SLOT(on_senhaAtuallineEdit_textChanged(const QString &)));
-
-    connect(ui->novaSenhalineEdit, SIGNAL(textChanged(const QString &)),
-            this, SLOT(on_novaSenhalineEdit_textChanged(const QString &)));
-
-    connect(ui->confirmarlineEdit, SIGNAL(textChanged(const QString &)),
-            this, SLOT(on_confirmarlineEdit_textChanged(const QString &)));
-
-    connect(ui->usernamelineEdit, SIGNAL(textChanged(const QString &)),
-            this, SLOT(on_usernamelineEdit_textChanged(const QString &)));
+    connect(ui->cancelBtn,SIGNAL(clicked()),this,SLOT(close()));
 }
 
 alterarSenha::~alterarSenha()
@@ -105,10 +95,6 @@ void alterarSenha::on_confirmarlineEdit_textChanged(const QString &arg1)
 
 }
 
-void alterarSenha::on_cancelBtn_clicked()
-{
-    this->close();
-}
 
 void alterarSenha::on_saveBtn_clicked()
 {

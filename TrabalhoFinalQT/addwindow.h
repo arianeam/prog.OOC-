@@ -20,7 +20,7 @@ private slots:
 
     void on_gravarBtn_clicked();
 
-    void on_cancelarBtn_clicked();
+    void on_obralineEdit_textChanged(const QString &arg1);
 
 private:
     Ui::addwindow *ui;
