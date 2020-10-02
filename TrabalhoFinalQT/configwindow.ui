@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>167</width>
-    <height>306</height>
+    <width>225</width>
+    <height>135</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
      <y>10</y>
-     <width>125</width>
-     <height>271</height>
+     <width>181</width>
+     <height>111</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="configverticalLayout">
@@ -34,27 +34,6 @@
      <widget class="QPushButton" name="alterarUsernameBtn">
       <property name="text">
        <string>Alterar nome de usuário</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="newAdmBtn">
-      <property name="text">
-       <string>Novo Administrador</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="excluiruseerBtn">
-      <property name="text">
-       <string>Excluir usuário</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="addUserBtn">
-      <property name="text">
-       <string>Adicionar usuário</string>
       </property>
      </widget>
     </item>

@@ -107,7 +107,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Gravar</string>
+    <string>Salvar</string>
    </property>
   </widget>
   <widget class="QPushButton" name="cancelarBtn">

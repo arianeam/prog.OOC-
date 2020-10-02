@@ -6,6 +6,7 @@ Mainwindow::Mainwindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Mainwindow)
 {
+
     ui->setupUi(this);
 
     ui->pesquisaBtn->setDisabled(true);
@@ -281,7 +282,6 @@ void Mainwindow::insere_linha(int linha, QSqlQuery query){
     ui->tableWidget->setRowHeight(linha,15);
 
 }
-
 
 
 void Mainwindow::on_configBtn_clicked()
