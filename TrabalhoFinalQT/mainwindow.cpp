@@ -29,13 +29,7 @@ Mainwindow::Mainwindow(QWidget *parent) :
             linha++;
         }
 
-        QStringList cabecalho = {"Id", "Obra", "Autor", "Edição", "Quantidade", "Seção", "Prateleira"};
-        ui->tableWidget->setHorizontalHeaderLabels(cabecalho);
-        ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
-        ui->tableWidget->verticalHeader()->setVisible(false);
-        ui->tableWidget->setColumnWidth(0,30);
-       // ui->tableWidget->setColumnWidth(0,30);
+        formato_tabela();
 
     }else{
 
@@ -123,6 +117,8 @@ void Mainwindow::on_listarBtn_clicked()
             insere_linha(linha,query);
             linha++;
         }
+
+        formato_tabela();
 
     }else{
 
@@ -269,5 +265,22 @@ void Mainwindow::insere_linha(int linha, QSqlQuery query){
     ui->tableWidget->setItem(linha,5,new QTableWidgetItem(query.value(5).toString()));
     ui->tableWidget->setItem(linha,6,new QTableWidgetItem(query.value(6).toString()));
     ui->tableWidget->setRowHeight(linha,15);
+
+}
+
+void Mainwindow::formato_tabela(){
+
+    QStringList cabecalho = {"Id", "Obra", "Autor", "Edição", "Quantidade", "Seção", "Prateleira"};
+    ui->tableWidget->setHorizontalHeaderLabels(cabecalho);
+    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableWidget->verticalHeader()->setVisible(false);
+    ui->tableWidget->setColumnWidth(0,30);
+    ui->tableWidget->setColumnWidth(1,400);
+    ui->tableWidget->setColumnWidth(2,200);
+    ui->tableWidget->setColumnWidth(3,100);
+    ui->tableWidget->setColumnWidth(4,100);
+    ui->tableWidget->setColumnWidth(5,100);
+    ui->tableWidget->setColumnWidth(5,100);
 
 }

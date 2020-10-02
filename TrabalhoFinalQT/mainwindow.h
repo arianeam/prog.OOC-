@@ -40,6 +40,8 @@ private slots:
 
     void insere_linha(int linha, QSqlQuery query);
 
+    void formato_tabela();
+
     void on_configBtn_clicked();
 
 private:
