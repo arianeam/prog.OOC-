@@ -7,10 +7,7 @@ alterarSenha::alterarSenha(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->novaSenhalineEdit->setDisabled(true);
-    ui->confirmarlineEdit->setDisabled(true);
     ui->saveBtn->setDisabled(true);
-    ui->senhaAtuallineEdit->setDisabled(true);
     ui->aviso7_label->setText("Insira o nome de usuário e senha atual");
 
     connect(ui->cancelBtn,SIGNAL(clicked()),this,SLOT(close()));
@@ -41,11 +38,11 @@ void alterarSenha::on_senhaAtuallineEdit_textChanged(const QString &arg1)
             }
 
             if(cont>0){
-                ui->novaSenhalineEdit->setEnabled(true);
+
                 ui->avisolabel->setText("Insira nova senha");
+
             }else{
 
-                ui->novaSenhalineEdit->setDisabled(true);
                 ui->avisolabel->setText("Senha incorreta!");
                 ui->saveBtn->setDisabled(true);
             }
@@ -60,11 +57,11 @@ void alterarSenha::on_novaSenhalineEdit_textChanged(const QString &arg1)
         QString nova_senha = ui->novaSenhalineEdit->text();
 
         if(nova_senha.size()>=5){
-            ui->confirmarlineEdit->setEnabled(true);
+
             ui->avisolabel_2->setText("Confirme a nova senha");
+
         }else{
 
-            ui->confirmarlineEdit->setDisabled(true);
             ui->avisolabel_2->setText("A senha deve conter pelo menos 5 caracteres!");
             ui->saveBtn->setDisabled(true);
         }
@@ -74,6 +71,8 @@ void alterarSenha::on_novaSenhalineEdit_textChanged(const QString &arg1)
 
 void alterarSenha::on_confirmarlineEdit_textChanged(const QString &arg1)
 {
+
+
     if(!arg1.isEmpty()){
 
         QString nova_senha = ui->novaSenhalineEdit->text();
@@ -87,7 +86,6 @@ void alterarSenha::on_confirmarlineEdit_textChanged(const QString &arg1)
         }else{
 
             ui->avisolabel_2->setText("Confirme a nova senha!");
-            ui->saveBtn->setDisabled(true);
             ui->saveBtn->setDisabled(true);
 
         }
@@ -104,16 +102,52 @@ void alterarSenha::on_saveBtn_clicked()
 
     QSqlQuery query;
 
-    query.prepare("update tb_login set senha='"+nova_senha+"' where senha='"+senha_antiga+"' and login='"+username+"'");
+    query.prepare("select * from tb_login where login='"+username+"' and senha='"+senha_antiga+"'");
 
     if(query.exec()){
 
-        QMessageBox::information(this,"","Senha alterada com suceso!");
-    }else{
+        int cont = 0;
 
-        QMessageBox::warning(this,"ERRO","Erro ao alterar senha!");
+        while(query.next())
+        {
+            cont++;
+        }
+
+        if(cont>0){
+            query.prepare("update tb_login set senha='"+nova_senha+"' where senha='"+senha_antiga+"' and login='"+username+"'");
+
+            if(query.exec()){
+
+                QMessageBox::information(this,"","Senha alterada com suceso!");
+
+                ui->usernamelineEdit->clear();
+                ui->senhaAtuallineEdit->clear();
+                ui->novaSenhalineEdit->clear();
+                ui->confirmarlineEdit->clear();
+
+            }else{
+
+                QMessageBox::warning(this,"ERRO","Erro ao alterar senha!");
+                ui->usernamelineEdit->clear();
+                ui->senhaAtuallineEdit->clear();
+                ui->novaSenhalineEdit->clear();
+                ui->confirmarlineEdit->clear();
+                ui->saveBtn->setDisabled(true);
+                ui->usernamelineEdit->setFocus();
+            }
+        }else{
+
+            ui->saveBtn->setDisabled(true);
+            QMessageBox::warning(this,"","Login inválido!");
+            ui->usernamelineEdit->clear();
+            ui->senhaAtuallineEdit->clear();
+            ui->novaSenhalineEdit->clear();
+            ui->confirmarlineEdit->clear();
+            ui->usernamelineEdit->setFocus();
+        }
 
     }
+
 }
 
 void alterarSenha::on_usernamelineEdit_textChanged(const QString &arg1)
@@ -136,18 +170,16 @@ void alterarSenha::on_usernamelineEdit_textChanged(const QString &arg1)
 
             if(cont>0){
 
-                ui->senhaAtuallineEdit->setEnabled(true);
                 ui->aviso7_label->setText("Insira a senha");
 
 
-             }else{
+            }else{
 
                 ui->aviso7_label->setText("Nome de usuário inválido");
                 ui->saveBtn->setDisabled(true);
                 ui->senhaAtuallineEdit->clear();
                 ui->novaSenhalineEdit->clear();
                 ui->confirmarlineEdit->clear();
-                cont = 0;
             }
         }
     }
