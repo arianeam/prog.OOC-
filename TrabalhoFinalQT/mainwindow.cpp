@@ -2,12 +2,13 @@
 #include "ui_mainwindow.h"
 #include <QStringList>
 
-Mainwindow::Mainwindow(QWidget *parent, Banco_de_dados* b) :
+Mainwindow::Mainwindow(QWidget *parent, Banco_de_dados* b, Usuario* us) :
     QDialog(parent),
     ui(new Ui::Mainwindow)
 {
 
     bd = b;
+    user = us;
     ui->setupUi(this);
 
     ui->pesquisaBtn->setDisabled(true);
@@ -251,7 +252,7 @@ void Mainwindow::on_tableWidget_itemClicked(QTableWidgetItem *item)
 
 void Mainwindow::on_configBtn_clicked()
 {
-    configwindow c;
+    configwindow c(this,user);
     c.exec();
 }
 

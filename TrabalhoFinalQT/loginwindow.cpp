@@ -24,22 +24,10 @@ void LoginWindow::on_loginBtn_clicked()
      QString username = ui->loginlineEdit->text();
      QString senha = ui->senhalineEdit->text();
 
-    QSqlQuery query;
-    query.prepare("select * from tb_login where login='"+username+"' and senha='"+senha+"'");
-
-    if(query.exec()){
-
-        int cont = 0;
-
-        while(query.next())
-        {
-            cont++;
-        }
-
-        if(cont>0){
+        if(user.logar(username,senha)>0){
             QMessageBox::information(this,"","Login efetuado com sucesso!");
             this->close();
-            Mainwindow m(this,&bd);
+            Mainwindow m(this,&bd, &user);
             m.setModal(true);
             m.exec();
         }else{
@@ -58,8 +46,6 @@ void LoginWindow::on_loginBtn_clicked()
             }
 
         }
-
-    }
 
 }
 

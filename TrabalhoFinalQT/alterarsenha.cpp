@@ -1,10 +1,11 @@
 #include "alterarsenha.h"
 #include "ui_alterarsenha.h"
 
-alterarSenha::alterarSenha(QWidget *parent) :
+alterarSenha::alterarSenha(QWidget *parent, Usuario* us) :
     QDialog(parent),
     ui(new Ui::alterarSenha)
 {
+    user = us;
     ui->setupUi(this);
 
     ui->saveBtn->setDisabled(true);
@@ -25,19 +26,7 @@ void alterarSenha::on_senhaAtuallineEdit_textChanged(const QString &arg1)
         QString senha = ui->senhaAtuallineEdit->text();
         QString username = ui->usernamelineEdit->text();
 
-        QSqlQuery query;
-        query.prepare("select * from tb_login where senha='"+senha+"' and login='"+username+"'");
-
-        if(query.exec()){
-
-            int cont = 0;
-
-            while(query.next())
-            {
-                cont++;
-            }
-
-            if(cont>0){
+            if(user->logar(username,senha)>0){
 
                 ui->avisolabel->setText("Insira nova senha");
 
@@ -47,7 +36,7 @@ void alterarSenha::on_senhaAtuallineEdit_textChanged(const QString &arg1)
                 ui->saveBtn->setDisabled(true);
             }
         }
-    }
+
 }
 
 void alterarSenha::on_novaSenhalineEdit_textChanged(const QString &arg1)
@@ -100,25 +89,12 @@ void alterarSenha::on_saveBtn_clicked()
     QString senha_antiga = ui->senhaAtuallineEdit->text();
     QString username = ui->usernamelineEdit->text();
 
-    QSqlQuery query;
 
-    query.prepare("select * from tb_login where login='"+username+"' and senha='"+senha_antiga+"'");
+        if(user->logar(username,senha_antiga)>0){
 
-    if(query.exec()){
+            if(user->update_senha(nova_senha)){
 
-        int cont = 0;
-
-        while(query.next())
-        {
-            cont++;
-        }
-
-        if(cont>0){
-            query.prepare("update tb_login set senha='"+nova_senha+"' where senha='"+senha_antiga+"' and login='"+username+"'");
-
-            if(query.exec()){
-
-                QMessageBox::information(this,"","Senha alterada com suceso!");
+                QMessageBox::information(this,"","Senha alterada com sucesso!");
 
                 ui->usernamelineEdit->clear();
                 ui->senhaAtuallineEdit->clear();
@@ -147,8 +123,6 @@ void alterarSenha::on_saveBtn_clicked()
             ui->confirmarlineEdit->clear();
             ui->usernamelineEdit->setFocus();
         }
-
-    }
 
 }
 

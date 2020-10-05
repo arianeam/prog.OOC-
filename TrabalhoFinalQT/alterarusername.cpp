@@ -1,10 +1,12 @@
 #include "alterarusername.h"
 #include "ui_alterarusername.h"
 
-alterarusername::alterarusername(QWidget *parent) :
+alterarusername::alterarusername(QWidget *parent, Usuario* us) :
     QDialog(parent),
     ui(new Ui::alterarusername)
 {
+    user = us;
+
     ui->setupUi(this);
 
     ui->SaveBtn->setDisabled(true);
@@ -27,19 +29,7 @@ void alterarusername::on_Senha_lineEdit_textChanged(const QString &arg1)
         QString senha = ui->Senha_lineEdit->text();
         QString username = ui->useratual_lineEdit->text();
 
-        QSqlQuery query;
-        query.prepare("select * from tb_login where senha='"+senha+"' and login='"+username+"'");
-
-        if(query.exec()){
-
-            int cont = 0;
-
-            while(query.next())
-            {
-                cont++;
-            }
-
-            if(cont>0){
+            if(user->logar(username,senha)>0){
 
                 ui->aviso4_label->setText("Insira o novo nome de usuário");
 
@@ -49,7 +39,7 @@ void alterarusername::on_Senha_lineEdit_textChanged(const QString &arg1)
                 ui->SaveBtn->setDisabled(true);
             }
         }
-    }
+
 }
 
 void alterarusername::on_novouser_lineEdit_textChanged(const QString &arg1)
@@ -98,23 +88,11 @@ void alterarusername::on_SaveBtn_clicked()
 
     QSqlQuery query;
 
-    query.prepare("select * from tb_login where login='"+username_antigo+"' and senha='"+senha+"'");
+        if(user->logar(username_antigo,senha)>0){
 
-    if(query.exec()){
+            if(user->update_username(novo_username)){
 
-        int cont = 0;
-
-        while(query.next())
-        {
-            cont++;
-        }
-
-        if(cont>0){
-            query.prepare("update tb_login set login='"+novo_username+"' where login='"+username_antigo+"' and senha='"+senha+"'");
-
-            if(query.exec()){
-
-                QMessageBox::information(this,"","Nome de usuário alterado com suceso!");
+                QMessageBox::information(this,"","Nome de usuário alterado com sucesso!");
                 ui->useratual_lineEdit->clear();
                 ui->Senha_lineEdit->clear();
                 ui->novouser_lineEdit->clear();
@@ -142,7 +120,7 @@ void alterarusername::on_SaveBtn_clicked()
             ui->confirmaruser_lineEdit->clear();
             ui->useratual_lineEdit->setFocus();
         }
-    }
+
 }
 
 void alterarusername::on_useratual_lineEdit_textChanged(const QString &arg1)

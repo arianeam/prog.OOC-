@@ -8,6 +8,7 @@
 #include <QTimer>
 #include <QMessageBox>
 #include "Banco_de_dados.h"
+#include "Usuario.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class LoginWindow; }
@@ -22,6 +23,7 @@ public:
     LoginWindow(QWidget *parent = nullptr);
     ~LoginWindow();
     Banco_de_dados bd;
+    Usuario user;
 
 private slots:
     void on_loginBtn_clicked();

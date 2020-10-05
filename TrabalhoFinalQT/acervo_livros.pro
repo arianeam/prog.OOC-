@@ -20,6 +20,7 @@ SOURCES += \
 
 HEADERS += \
     Banco_de_dados.h \
+    Usuario.h \
     addwindow.h \
     alterarsenha.h \
     alterarusername.h \

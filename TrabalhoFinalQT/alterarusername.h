@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "loginwindow.h"
+#include "Usuario.h"
 
 namespace Ui {
 class alterarusername;
@@ -13,8 +14,10 @@ class alterarusername : public QDialog
     Q_OBJECT
 
 public:
-    explicit alterarusername(QWidget *parent = nullptr);
+    explicit alterarusername(QWidget *parent = nullptr, Usuario* us = NULL);
     ~alterarusername();
+
+    Usuario* user;
 
 private slots:
 

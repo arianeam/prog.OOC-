@@ -8,6 +8,7 @@
 #include "loginwindow.h"
 #include "editwindow.h"
 #include "Banco_de_dados.h"
+#include "Usuario.h"
 
 namespace Ui {
 class Mainwindow;
@@ -18,10 +19,11 @@ class Mainwindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit Mainwindow(QWidget *parent = nullptr, Banco_de_dados* b = NULL);
+    explicit Mainwindow(QWidget *parent = nullptr, Banco_de_dados* b = NULL, Usuario* us = NULL );
     ~Mainwindow();
 
     Banco_de_dados* bd;
+    Usuario* user;
 
 private slots:
 
