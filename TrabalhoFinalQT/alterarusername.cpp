@@ -129,19 +129,7 @@ void alterarusername::on_useratual_lineEdit_textChanged(const QString &arg1)
 
         QString username = ui->useratual_lineEdit->text();
 
-        QSqlQuery query;
-        query.prepare("select * from tb_login where login='"+username+"'");
-
-        if(query.exec()){
-
-            int cont = 0;
-
-            while(query.next())
-            {
-                cont++;
-            }
-
-            if(cont>0){
+            if(user->select_username(username)>0){
 
                 ui->Senha_lineEdit->setEnabled(true);
                 ui->aviso3_label->setText("Insira a senha");
@@ -155,5 +143,5 @@ void alterarusername::on_useratual_lineEdit_textChanged(const QString &arg1)
                 ui->confirmaruser_lineEdit->clear();
             }
         }
-    }
+
 }

@@ -58,6 +58,25 @@ public:
 
     }
 
+   int select_username(QString u){
+       QSqlQuery query;
+       query.prepare("select * from tb_login where login='"+u+"'");
+
+       if(query.exec()){
+
+           int cont = 0;
+
+           while(query.next())
+           {
+               cont++;
+           }
+
+           return cont;
+   }else{
+           return 0;
+       }
+   }
+
 };
 
 #endif // USUARIO_H
