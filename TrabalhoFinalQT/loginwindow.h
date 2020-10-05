@@ -7,6 +7,7 @@
 #include "mainwindow.h"
 #include <QTimer>
 #include <QMessageBox>
+#include "Banco_de_dados.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class LoginWindow; }
@@ -20,7 +21,7 @@ class LoginWindow : public QMainWindow
 public:
     LoginWindow(QWidget *parent = nullptr);
     ~LoginWindow();
-    QSqlDatabase bd_acervo = QSqlDatabase::addDatabase("QSQLITE");
+    Banco_de_dados bd;
 
 private slots:
     void on_loginBtn_clicked();

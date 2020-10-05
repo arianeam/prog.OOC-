@@ -19,6 +19,7 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    Banco_de_dados.h \
     addwindow.h \
     alterarsenha.h \
     alterarusername.h \

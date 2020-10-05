@@ -2,11 +2,12 @@
 #include "ui_mainwindow.h"
 #include <QStringList>
 
-Mainwindow::Mainwindow(QWidget *parent) :
+Mainwindow::Mainwindow(QWidget *parent, Banco_de_dados* b) :
     QDialog(parent),
     ui(new Ui::Mainwindow)
 {
 
+    bd = b;
     ui->setupUi(this);
 
     ui->pesquisaBtn->setDisabled(true);
@@ -204,8 +205,8 @@ void Mainwindow::on_sairBtn_clicked()
 
 
     if(ret==QMessageBox::Yes){
-        LoginWindow l;
-        l.bd_acervo.close();
+
+        bd->fechar_bd();
         this->close();
     }
 }

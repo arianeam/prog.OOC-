@@ -8,19 +8,9 @@ LoginWindow::LoginWindow(QWidget *parent)
     , ui(new Ui::LoginWindow)
 {
     ui->setupUi(this);
-
-    QString local = qApp->applicationDirPath();
-    QString bd = local + "/acervo.db";
-    bd_acervo.setDatabaseName(bd);
-
-   // bd_acervo.setDatabaseName("C:/Users/PICHAU/Documents/programas_QT/acervo_livros/acervo.db");
-
-    if(!bd_acervo.open())
-    {
+    if(!bd.abrir_bd()){
         QMessageBox::warning(this,"ERRO","Erro ao abrir banco de dados!");
-
     }
-
 }
 
 LoginWindow::~LoginWindow()
@@ -33,11 +23,6 @@ void LoginWindow::on_loginBtn_clicked()
 {
      QString username = ui->loginlineEdit->text();
      QString senha = ui->senhalineEdit->text();
-
-    if(!bd_acervo.isOpen()){
-        QMessageBox::warning(this,"ERRO","Erro ao abrir banco de dados!");
-        return;
-    }
 
     QSqlQuery query;
     query.prepare("select * from tb_login where login='"+username+"' and senha='"+senha+"'");
@@ -54,7 +39,7 @@ void LoginWindow::on_loginBtn_clicked()
         if(cont>0){
             QMessageBox::information(this,"","Login efetuado com sucesso!");
             this->close();
-            Mainwindow m;
+            Mainwindow m(this,&bd);
             m.setModal(true);
             m.exec();
         }else{
