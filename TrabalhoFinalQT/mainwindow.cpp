@@ -15,30 +15,20 @@ Mainwindow::Mainwindow(QWidget *parent, Banco_de_dados* b, Usuario* us) :
     ui->editarBtn->setDisabled(true);
     ui->excluirBtn->setDisabled(true);
 
-
+    ui->tableWidget->setColumnCount(7);
     int linha = 0;
-    QSqlQuery query;
 
-    query.prepare("select * from tb_acervo");
+    if(livro.select_todos()){
+        while(livro.Query.next()){
 
-    if(query.exec()){
-
-        ui->tableWidget->setColumnCount(7);
-
-        while(query.next())
-        {
-            insere_linha(linha,query);
+            insere_linha(linha);
             linha++;
         }
-
         formato_tabela();
 
     }else{
-
-        QMessageBox::warning(this,"ERRO","Erro ao listar acervo!");
-
+        QMessageBox::warning(this,"ERRO","Erro ao listar banco de dados!");
     }
-
 }
 
 Mainwindow::~Mainwindow()
@@ -49,42 +39,44 @@ Mainwindow::~Mainwindow()
 
 void Mainwindow::on_addBtn_clicked()
 {
-    int linha = 0;
     ui->pesquisaBtn->setDisabled(true);
     ui->editarBtn->setDisabled(true);
     ui->excluirBtn->setDisabled(true);
 
-    addwindow a;
+    addwindow a(this, &livro);
     a.exec();
 
-    QSqlQuery query;
-
-    query.prepare("select * from tb_acervo");
     ui->tableWidget->setRowCount(0);
+    int linha = 0;
 
-    if(query.exec()){
+    if(livro.select_todos()){
+        while(livro.Query.next()){
 
-        while(query.next())
-        {
             ui->tableWidget->removeRow(linha);
             linha++;
         }
+
+    }else{
+        QMessageBox::warning(this,"ERRO","Erro ao listar item!");
     }
 
-    linha=0;
-    if(query.exec()){
+    linha = 0;
+    ui->editarBtn->setDisabled(true);
 
-        ui->editarBtn->setDisabled(true);
+    ui->tableWidget->setColumnCount(7);
 
-        ui->tableWidget->setColumnCount(7);
+    if(livro.select_todos()){
+        while(livro.Query.next()){
 
-        while(query.next())
-        {
-            insere_linha(linha,query);
+            insere_linha(linha);
             linha++;
         }
+        formato_tabela();
 
+    }else{
+        QMessageBox::warning(this,"ERRO","Erro ao listar item!");
     }
+
 }
 
 void Mainwindow::on_listarBtn_clicked()
@@ -92,101 +84,93 @@ void Mainwindow::on_listarBtn_clicked()
     ui->pesquisaBtn->setDisabled(true);
     ui->editarBtn->setDisabled(true);
     ui->excluirBtn->setDisabled(true);
-    int linha = 0;
-    QSqlQuery query;
 
-    query.prepare("select * from tb_acervo");
     ui->tableWidget->setRowCount(0);
 
-    if(query.exec()){
+    int linha = 0;
+    QString id;
 
-        while(query.next())
-        {
+    if(livro.select_todos()){
+        while(livro.Query.next()){
+
             ui->tableWidget->removeRow(linha);
             linha++;
         }
+    }else{
+        QMessageBox::warning(this,"ERRO","Erro ao listar item!");
     }
 
-    linha=0;
-    if(query.exec()){
+    linha = 0;
 
-        ui->editarBtn->setDisabled(true);
+    ui->editarBtn->setDisabled(true);
 
-        ui->tableWidget->setColumnCount(7);
+    ui->tableWidget->setColumnCount(7);
 
-        while(query.next())
-        {
-            insere_linha(linha,query);
+    if(livro.select_todos()){
+        while(livro.Query.next()){
+
+            insere_linha(linha);
             linha++;
         }
-
         formato_tabela();
 
     }else{
-
-        QMessageBox::warning(this,"ERRO","Erro ao listar acervo!");
-
+        QMessageBox::warning(this,"ERRO","Erro ao listar item!");
     }
-
-
 }
 
 void Mainwindow::on_pesquisaBtn_clicked()
 {
     ui->excluirBtn->setDisabled(true);
     ui->editarBtn->setDisabled(true);
-    int linha = 0;
-    QSqlQuery query;
 
-    query.prepare("select * from tb_acervo");
     ui->tableWidget->setRowCount(0);
 
-    if(query.exec()){
+    int linha = 0;
 
-        while(query.next())
-        {
+    if(livro.select_todos()){
+        while(livro.Query.next()){
+
             ui->tableWidget->removeRow(linha);
             linha++;
         }
+    }else{
+        QMessageBox::warning(this,"ERRO","Erro ao listar item!");
     }
+
+    linha = 0;
 
     QString pesquisar = ui->pesquisarlineEdit->text();
 
-    query.prepare("select * from tb_acervo where id like '%"+pesquisar+"%' or obra like '%"+pesquisar+"%' or autor like'%"+pesquisar+"%'"
-                                                                                                                                     "or edicao like'%"+pesquisar+"%' or quantidade like '%"+pesquisar+"%' or secao like '%"+pesquisar+"%' or prateleira like '%"+pesquisar+"%'");
+    if(livro.pesquisar_query(pesquisar)){
 
-    if(query.exec()){
-
-        int linha = 0;
         ui->tableWidget->setColumnCount(7);
+            while(livro.Query.next()){
 
-        while(query.next())
-        {
-            insere_linha(linha,query);
-            linha++;
+                insere_linha(linha);
+                linha++;
+            }
+            formato_tabela();
+
+        }else{
+            QMessageBox::warning(this,"ERRO","Erro ao listar item!");
         }
 
-    }else{
-
-        QMessageBox::warning(this,"ERRO","Erro ao efetuar pesquisa!");
-
-    }
 }
 
 void Mainwindow::on_excluirBtn_clicked()
 {
     ui->pesquisaBtn->setDisabled(true);
     ui->editarBtn->setDisabled(true);
+
     int linha= ui->tableWidget->currentRow();
     QString id= ui->tableWidget->item(linha,0)->text();
-    QSqlQuery query;
-    query.prepare("delete from tb_acervo where id='"+QString::number(id.toInt())+"'");
 
     QMessageBox::StandardButton ret = QMessageBox::question(this,"","Deseja excluir item?");
 
-
     if(ret==QMessageBox::Yes){
-        if(query.exec()){
+
+        if(livro.excluir_query(id)){
 
             ui->tableWidget->removeRow(linha);
 
@@ -197,13 +181,11 @@ void Mainwindow::on_excluirBtn_clicked()
             QMessageBox::warning(this,"ERRO","Erro ao excluir item!");
         }
     }
-
 }
 
 void Mainwindow::on_sairBtn_clicked()
 {
     QMessageBox::StandardButton ret = QMessageBox::question(this,"","Deseja sair?");
-
 
     if(ret==QMessageBox::Yes){
 
@@ -216,25 +198,36 @@ void Mainwindow::on_editarBtn_clicked()
 {
     int linha= ui->tableWidget->currentRow();
     QString id= ui->tableWidget->item(linha,0)->text();
-    editwindow e(this, id);
+    editwindow e(this, id, &livro);
     e.exec();
 
-    QSqlQuery query;
-    query.prepare("select * from tb_acervo where id='"+QString::number(id.toInt())+"'");
+    ui->tableWidget->setRowCount(0);
+    linha = 0;
 
-    ui->tableWidget->removeRow(linha);
+    if(livro.select_todos()){
+        while(livro.Query.next()){
 
-
-    if(query.exec()){
-
-        query.next();
-        insere_linha(linha,query);
+            ui->tableWidget->removeRow(linha);
+            linha++;
+        }
 
     }else{
-
-        QMessageBox::warning(this,"ERRO","Erro ao atualizar exibição do item!");
+        QMessageBox::warning(this,"ERRO","Erro ao listar item!");
     }
 
+    linha = 0;
+
+    if(livro.select_todos()){
+        while(livro.Query.next()){
+
+            insere_linha(linha);
+            linha++;
+        }
+        formato_tabela();
+
+    }else{
+        QMessageBox::warning(this,"ERRO","Erro ao listar banco de dados!");
+    }
 }
 
 void Mainwindow::on_pesquisarlineEdit_textChanged(const QString &arg1)
@@ -256,16 +249,16 @@ void Mainwindow::on_configBtn_clicked()
     c.exec();
 }
 
-void Mainwindow::insere_linha(int linha, QSqlQuery query){
+void Mainwindow::insere_linha(int linha){
 
     ui->tableWidget->insertRow(linha);
-    ui->tableWidget->setItem(linha,0,new QTableWidgetItem(query.value(0).toString()));
-    ui->tableWidget->setItem(linha,1,new QTableWidgetItem(query.value(1).toString()));
-    ui->tableWidget->setItem(linha,2,new QTableWidgetItem(query.value(2).toString()));
-    ui->tableWidget->setItem(linha,3,new QTableWidgetItem(query.value(3).toString()));
-    ui->tableWidget->setItem(linha,4,new QTableWidgetItem(query.value(4).toString()));
-    ui->tableWidget->setItem(linha,5,new QTableWidgetItem(query.value(5).toString()));
-    ui->tableWidget->setItem(linha,6,new QTableWidgetItem(query.value(6).toString()));
+    ui->tableWidget->setItem(linha,0,new QTableWidgetItem(livro.Query.value(0).toString()));
+    ui->tableWidget->setItem(linha,1,new QTableWidgetItem(livro.Query.value(1).toString()));
+    ui->tableWidget->setItem(linha,2,new QTableWidgetItem(livro.Query.value(2).toString()));
+    ui->tableWidget->setItem(linha,3,new QTableWidgetItem(livro.Query.value(3).toString()));
+    ui->tableWidget->setItem(linha,4,new QTableWidgetItem(livro.Query.value(4).toString()));
+    ui->tableWidget->setItem(linha,5,new QTableWidgetItem(livro.Query.value(5).toString()));
+    ui->tableWidget->setItem(linha,6,new QTableWidgetItem(livro.Query.value(6).toString()));
     ui->tableWidget->setRowHeight(linha,15);
 
 }

@@ -1,30 +1,28 @@
 #include "editwindow.h"
 #include "ui_editwindow.h"
 
-static QString id_acervo;
-
-editwindow::editwindow(QWidget *parent, QString id) :
+editwindow::editwindow(QWidget *parent, QString id, Livro* l) :
     QDialog(parent),
     ui(new Ui::editwindow)
 {
+    livro = l;
+
     ui->setupUi(this);
 
     ui->GravarBtn->setDisabled(true);
 
     id_acervo = id;
 
-    QSqlQuery query;
-    query.prepare("select * from tb_acervo where id='"+QString::number(id.toInt())+"'");
+    if(livro->select_livro(id)){
 
-    if(query.exec()){
-        query.first();
         ui->idtxt->setText(id);
-        ui->ObraLineEdit->setText(query.value(1).toString());
-        ui->AutorLineEdit->setText(query.value(2).toString());
-        ui->EdLineEdit->setText(query.value(3).toString());
-        ui->QntdLineEdit->setText(query.value(4).toString());
-        ui->SecaoLineEdit->setText(query.value(5).toString());
-        ui->PratLineEdit->setText(query.value(6).toString());
+        ui->ObraLineEdit->setText(livro->obra);
+        ui->AutorLineEdit->setText(livro->autor);
+        ui->EdLineEdit->setText(livro->edicao);
+        ui->QntdLineEdit->setText(livro->quantidade);
+        ui->SecaoLineEdit->setText(livro->secao);
+        ui->PratLineEdit->setText(livro->prateleira);
+
     }else{
 
         QMessageBox::warning(this,"ERRO","Erro ao editar item!");
@@ -41,19 +39,14 @@ editwindow::~editwindow()
 
 void editwindow::on_GravarBtn_clicked()
 {
-    QString obra = ui->ObraLineEdit->text();
-    QString autor = ui->AutorLineEdit->text();
-    QString edicao = ui->EdLineEdit->text();
-    QString quantidade = ui->QntdLineEdit->text();
-    QString secao = ui->SecaoLineEdit->text();
-    QString prateleira = ui->PratLineEdit->text();
+    livro->obra = ui->ObraLineEdit->text();
+    livro->autor = ui->AutorLineEdit->text();
+    livro->edicao = ui->EdLineEdit->text();
+    livro->quantidade = ui->QntdLineEdit->text();
+    livro->secao = ui->SecaoLineEdit->text();
+    livro->prateleira = ui->PratLineEdit->text();
 
-    QSqlQuery query;
-    query.prepare("update tb_acervo set obra='"+obra+"',autor='"+autor+"',"
-                  "edicao='"+edicao+"',quantidade='"+QString::number(quantidade.toInt())+"',secao='"+secao+"', prateleira='"+prateleira+"'"
-                   "where id='"+id_acervo+"'");
-
-    if(query.exec()){
+    if(livro->update_livro(id_acervo)){
 
         QMessageBox::information(this,"","Item gravado com sucesso!");
     }else{
@@ -62,16 +55,14 @@ void editwindow::on_GravarBtn_clicked()
     }
 }
 
-
-
 void editwindow::on_ObraLineEdit_textChanged(const QString &arg1)
 {
-  if(arg1.isEmpty()){
+    if(arg1.isEmpty()){
 
-      ui->GravarBtn->setDisabled(true);
-      ui->obra_label->setText("Campo obrigatório!");
-  }else{
+        ui->GravarBtn->setDisabled(true);
+        ui->obra_label->setText("Campo obrigatório!");
+    }else{
 
-      ui->GravarBtn->setEnabled(true);
-  }
+        ui->GravarBtn->setEnabled(true);
+    }
 }

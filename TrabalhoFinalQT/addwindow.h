@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include "loginwindow.h"
+#include <QVector>
+#include <Livro.h>
 
 namespace Ui {
 class addwindow;
@@ -13,8 +15,9 @@ class addwindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit addwindow(QWidget *parent = nullptr);
+    explicit addwindow(QWidget *parent = nullptr, Livro* l = NULL);
     ~addwindow();
+    Livro* livro;
 
 private slots:
 

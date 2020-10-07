@@ -9,6 +9,7 @@
 #include "editwindow.h"
 #include "Banco_de_dados.h"
 #include "Usuario.h"
+#include "Livro.h"
 
 namespace Ui {
 class Mainwindow;
@@ -24,6 +25,7 @@ public:
 
     Banco_de_dados* bd;
     Usuario* user;
+    Livro livro;
 
 private slots:
 
@@ -43,7 +45,7 @@ private slots:
 
     void on_tableWidget_itemClicked(QTableWidgetItem *item);
 
-    void insere_linha(int linha, QSqlQuery query);
+    void insere_linha(int linha);
 
     void formato_tabela();
 

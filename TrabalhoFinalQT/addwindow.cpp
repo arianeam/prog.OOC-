@@ -1,10 +1,11 @@
 #include "addwindow.h"
 #include "ui_addwindow.h"
 
-addwindow::addwindow(QWidget *parent) :
+addwindow::addwindow(QWidget *parent, Livro* l) :
     QDialog(parent),
     ui(new Ui::addwindow)
 {
+    livro = l;
     ui->setupUi(this);
 
     ui->gravarBtn->setDisabled(true);
@@ -20,19 +21,16 @@ addwindow::~addwindow()
 
 void addwindow::on_gravarBtn_clicked()
 {
-    QString obra = ui->obralineEdit->text();
-    QString autor = ui->autorlineEdit->text();
-    QString edicao = ui->edicaolineEdit->text();
-    QString quantidade = ui->qntdlineEdit->text();
-    QString secao = ui->secaolineEdit->text();
-    QString prateleira = ui->prateleiralineEdit->text();
 
-    QSqlQuery query;
+     livro->obra = ui->obralineEdit->text();
+     livro->autor = ui->autorlineEdit->text();
+     livro->edicao = ui->edicaolineEdit->text();
+     livro->quantidade = ui->qntdlineEdit->text();
+     livro->secao = ui->secaolineEdit->text();
+     livro->prateleira = ui->prateleiralineEdit->text();
 
-    query.prepare("insert into tb_acervo (obra,autor,edicao,quantidade,secao,prateleira) values"
-                  "('"+obra+"','"+autor+"','"+edicao+"','"+QString::number(quantidade.toInt())+"','"+secao+"','"+prateleira+"')");
 
-    if(query.exec()){
+    if(livro->insert_livro()){
         QMessageBox::information(this,"","Dados inseridos com sucesso!");
 
         ui->obralineEdit->clear();
@@ -57,10 +55,10 @@ void addwindow::on_obralineEdit_textChanged(const QString &arg1)
 {
     if(arg1.isEmpty()){
 
-            ui->gravarBtn->setDisabled(true);
-            ui->obralabel_2->setText("Campo obrigatório!");
+        ui->gravarBtn->setDisabled(true);
+        ui->obralabel_2->setText("Campo obrigatório!");
 
-        }else{
+    }else{
 
         ui->gravarBtn->setEnabled(true);
     }
